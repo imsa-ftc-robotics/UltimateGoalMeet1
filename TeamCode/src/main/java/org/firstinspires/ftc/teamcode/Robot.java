@@ -10,6 +10,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvCameraRotation;
+import org.openftc.easyopencv.OpenCvInternalCamera;
 
 public abstract class Robot extends LinearOpMode {
 
@@ -28,7 +32,8 @@ public abstract class Robot extends LinearOpMode {
 
     public static Robot running_opmode;
 
-
+    private OpenCvInternalCamera phoneCam;
+    private RingDeterminationPipeline pipeline;
 
     public void runOpMode(){
         if (initialize_hardware){
@@ -79,19 +84,37 @@ public abstract class Robot extends LinearOpMode {
             rightFrontDrive.setVelocityPIDFCoefficients(12.20372439*0.1, 12.20372439*0.01, 0, 12.20372439);
             rightFrontDrive.setPositionPIDFCoefficients(p);
             rightFrontDrive.setTargetPositionTolerance(target_tollerance);
+        }
 
-            try {
-                running_opmode = this;
-                op_mode();
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        phoneCam = OpenCvCameraFactory.getInstance().createInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
+        pipeline = new RingDeterminationPipeline();
+        phoneCam.setPipeline(pipeline);
+
+        // We set the viewport policy to optimized view so the preview doesn't appear 90 deg
+        // out when the RC activity is in portrait. We do our actual image processing assuming
+        // landscape orientation, though.
+        phoneCam.setViewportRenderingPolicy(OpenCvCamera.ViewportRenderingPolicy.OPTIMIZE_VIEW);
+
+        phoneCam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
+        {
+            @Override
+            public void onOpened()
+            {
+                phoneCam.startStreaming(320,240, OpenCvCameraRotation.SIDEWAYS_LEFT);
             }
-            finally {
-                running_opmode = null;
-            }
+        });
 
-
-
+        try {
+            running_opmode = this;
+            op_mode();
+        }
+        finally {
+            running_opmode = null;
         }
     }
+
+    public DropPosition getDropPosition() { return pipeline.getDropPosition(); }
 
     public abstract void op_mode();
     public double getFirstAngle(){
