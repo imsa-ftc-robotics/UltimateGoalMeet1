@@ -4,6 +4,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -21,6 +22,7 @@ public abstract class Robot extends LinearOpMode {
     public DcMotorEx rightBackDrive;
     public DcMotorEx leftFrontDrive;
     public DcMotorEx rightFrontDrive;
+    public Servo wobblegoal;
 
     public BNO055IMU imu;
 
@@ -52,6 +54,8 @@ public abstract class Robot extends LinearOpMode {
             rightFrontDrive = (DcMotorEx)hardwareMap.get("frontRight");
             rightFrontDrive.setDirection(DcMotorEx.Direction.REVERSE);
             rightFrontDrive.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+
+            wobblegoal =(Servo)hardwareMap.get("wobbleGoal");
 
             BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
             parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
