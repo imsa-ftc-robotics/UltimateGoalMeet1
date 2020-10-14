@@ -26,6 +26,9 @@ public abstract class Robot extends LinearOpMode {
     public DcMotorEx wobbleGoalMotor;
     public Servo wobbleGoalServo;
 
+    public static final double WOBBLE_CLOSED = 1;
+    public static final double WOBBLE_OPEN = 0;
+
     public BNO055IMU imu;
 
     public Orientation angles;
@@ -122,6 +125,52 @@ public abstract class Robot extends LinearOpMode {
             running_opmode = null;
         }
     }
+    public void resetDriveEncoders(){
+        leftFrontDrive.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        leftBackDrive.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        rightFrontDrive.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        rightBackDrive.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
+    public void moveToPosition(double motorPower, int ticks){
+        resetDriveEncoders();
+
+        double motorVelocity = motorPower*2700;
+
+        leftBackDrive.setTargetPosition(ticks);
+        leftFrontDrive.setTargetPosition(ticks);
+        rightBackDrive.setTargetPosition(ticks);
+        rightFrontDrive.setTargetPosition(ticks);
+
+        leftBackDrive.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        leftFrontDrive.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        rightBackDrive.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        rightFrontDrive.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+
+
+        rightFrontDrive.setVelocity(motorVelocity);
+        rightBackDrive.setVelocity(motorVelocity);
+        leftBackDrive.setVelocity(motorVelocity);
+        leftFrontDrive.setVelocity(motorVelocity);
+
+        while(leftBackDrive.isBusy() && !isStopRequested()){
+            telemetry.addData("Status", "not there yet");
+            telemetry.addData("left back", leftBackDrive.getCurrentPosition());
+            telemetry.addData("left front", leftFrontDrive.getCurrentPosition());
+            telemetry.addData("right back", rightBackDrive.getCurrentPosition());
+            telemetry.addData("right front", rightFrontDrive.getCurrentPosition());
+            telemetry.addData("busy1", leftBackDrive.isBusy());
+            telemetry.addData("busy2", leftFrontDrive.isBusy());
+            telemetry.addData("busy3", rightFrontDrive.isBusy());
+            telemetry.addData("busy4", rightBackDrive.isBusy());
+            telemetry.addData("Target", leftBackDrive.getTargetPosition());
+            telemetry.update();
+        }
+
+        stopDrivetrain();
+
+    }
+
 
     public DropPosition getDropPosition() { return pipeline.getDropPosition(); }
 
