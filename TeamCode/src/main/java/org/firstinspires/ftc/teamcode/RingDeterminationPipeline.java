@@ -52,7 +52,7 @@ public class RingDeterminationPipeline extends OpenCvPipeline {
     int avg1;
 
     // Volatile since accessed by OpMode thread w/o synchronization
-    private volatile RingDeterminationPipeline.RingPosition position = RingDeterminationPipeline.RingPosition.FOUR;
+    private volatile RingPosition position = RingPosition.FOUR;
 
     /*
      * This function takes the RGB frame, converts to YCrCb,
@@ -86,13 +86,13 @@ public class RingDeterminationPipeline extends OpenCvPipeline {
                 BLUE, // The color the rectangle is drawn in
                 2); // Thickness of the rectangle lines
 
-        position = RingDeterminationPipeline.RingPosition.FOUR; // Record our analysis
+        position = RingPosition.FOUR; // Record our analysis
         if(avg1 > FOUR_RING_THRESHOLD){
-            position = RingDeterminationPipeline.RingPosition.FOUR;
+            position = RingPosition.FOUR;
         }else if (avg1 > ONE_RING_THRESHOLD){
-            position = RingDeterminationPipeline.RingPosition.ONE;
+            position = RingPosition.ONE;
         }else{
-            position = RingDeterminationPipeline.RingPosition.NONE;
+            position = RingPosition.NONE;
         }
 
         Imgproc.rectangle(

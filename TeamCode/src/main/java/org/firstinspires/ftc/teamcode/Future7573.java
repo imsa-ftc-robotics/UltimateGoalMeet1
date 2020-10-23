@@ -93,7 +93,7 @@ public interface Future7573 {
             Future7573 result = this.chain.get(0).poll();
             if (result == null) {
                 return null;
-            } else if (result instanceof Future7573.Next) {
+            } else if (result instanceof Next) {
                 this.chain.remove(0);
                 if (this.chain.size() < 1) return null;
                 else return this;
