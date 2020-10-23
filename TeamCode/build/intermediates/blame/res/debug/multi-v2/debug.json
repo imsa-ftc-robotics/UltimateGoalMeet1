@@ -2142,21 +2142,6 @@
             ]
         },
         {
-            "outputFile": "C:\\TITANS_17576\\2020-2021\\Software\\UltimateGoal\\UltimateGoalMeet1\\TeamCode\\build\\intermediates\\res\\merged\\debug\\values-w820dp-v13_values-w820dp-v13.arsc.flat",
-            "map": [
-                {
-                    "source": "C:\\TITANS_17576\\2020-2021\\Software\\UltimateGoal\\UltimateGoalMeet1\\FtcRobotController\\build\\intermediates\\packaged_res\\debug\\values-w820dp-v13\\values-w820dp-v13.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "57",
-                        "endOffsets": "108"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "C:\\TITANS_17576\\2020-2021\\Software\\UltimateGoal\\UltimateGoalMeet1\\TeamCode\\build\\intermediates\\res\\merged\\debug\\values-zh-rCN_values-zh-rCN.arsc.flat",
             "map": [
                 {
@@ -2327,21 +2312,6 @@
                         "startOffsets": "3072",
                         "endColumns": "100",
                         "endOffsets": "3168"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "C:\\TITANS_17576\\2020-2021\\Software\\UltimateGoal\\UltimateGoalMeet1\\TeamCode\\build\\intermediates\\res\\merged\\debug\\values-sw720dp-land-v13_values-sw720dp-land-v13.arsc.flat",
-            "map": [
-                {
-                    "source": "C:\\TITANS_17576\\2020-2021\\Software\\UltimateGoal\\UltimateGoalMeet1\\FtcRobotController\\build\\intermediates\\packaged_res\\debug\\values-sw720dp-land-v13\\values-sw720dp-land-v13.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "58",
-                        "endOffsets": "109"
                     }
                 }
             ]
