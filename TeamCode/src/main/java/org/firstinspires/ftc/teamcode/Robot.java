@@ -188,6 +188,7 @@ public abstract class Robot extends LinearOpMode {
     public DropPosition getDropPosition() { return pipeline.getDropPosition(); }
 
     public abstract void op_mode();
+
     public double getFirstAngle(){
         return imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.RADIANS).firstAngle;
     }
