@@ -42,6 +42,9 @@ public class Default_Teleop extends Robot{
             telemetry.addData("Right Front Power", rightFrontPower);
             telemetry.update();
 
+            double IntakePower = gamepad1.left_trigger;
+            intake.setPower(IntakePower);
         }
+
     }
 }

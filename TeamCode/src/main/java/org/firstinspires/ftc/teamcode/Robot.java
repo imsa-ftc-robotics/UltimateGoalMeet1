@@ -25,7 +25,7 @@ public abstract class Robot extends LinearOpMode {
     public DcMotorEx rightFrontDrive;
     public DcMotorEx wobbleGoalMotor;
     public Servo wobbleGoalServo;
-
+    public DcMotorEx intake;
     public static final double WOBBLE_CLOSED = 1;
     public static final double WOBBLE_OPEN = 0;
 
@@ -64,6 +64,10 @@ public abstract class Robot extends LinearOpMode {
             wobbleGoalMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             wobbleGoalServo =(Servo)hardwareMap.get("wobbleGoalServo");
+
+            intake = (DcMotorEx)hardwareMap.get("intakeMotor");
+            intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
             BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
             parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
