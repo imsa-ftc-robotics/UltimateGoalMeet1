@@ -53,7 +53,17 @@ public class Default_Teleop extends Robot{
             double wobbleGoalMotorPower = gamepad2.right_stick_y;
             wobbleGoalMotor.setPower(wobbleGoalMotorPower);
 
+            double armPower = gamepad2.left_stick_y;
+            arm.setPower(armPower);
 
+            if (gamepad2.dpad_up)
+                tray.setPosition(1);
+
+            if (gamepad2.dpad_down)
+                tray.setPosition(0);
+
+            double intakeWinchPower = gamepad2.right_trigger;
+            intakeWinch.setPower(intakeWinchPower);
         }
 
     }
