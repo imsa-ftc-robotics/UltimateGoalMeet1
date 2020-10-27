@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -24,8 +25,12 @@ public abstract class Robot extends LinearOpMode {
     public DcMotorEx leftFrontDrive;
     public DcMotorEx rightFrontDrive;
     public DcMotorEx wobbleGoalMotor;
-    public Servo wobbleGoalServo;
     public DcMotorEx intake;
+    public DcMotor arm;
+
+    public CRServo intakeWinch;
+    public Servo wobbleGoalServo;
+    public Servo tray;
     public static final double WOBBLE_CLOSED = 1;
     public static final double WOBBLE_OPEN = 0;
 
@@ -60,14 +65,18 @@ public abstract class Robot extends LinearOpMode {
             rightFrontDrive.setDirection(DcMotorEx.Direction.REVERSE);
             rightFrontDrive.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-            wobbleGoalMotor =(DcMotorEx)hardwareMap.get("wobbleGoalMotor");
-            wobbleGoalMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            wobbleGoalMotor =(DcMotorEx)hardwareMap.get("wobbleGoal");
+            wobbleGoalMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+
+            intake = (DcMotorEx)hardwareMap.get("intake");
+            intake.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+
+            arm = (DcMotorEx)hardwareMap.get("arm");
+            arm.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
             wobbleGoalServo =(Servo)hardwareMap.get("wobbleGoalServo");
-
-            intake = (DcMotorEx)hardwareMap.get("intakeMotor");
-            intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
+            tray = (Servo)hardwareMap.get("tray");
+            intakeWinch = (CRServo)hardwareMap.get("intakeWinch");
 
             BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
             parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
