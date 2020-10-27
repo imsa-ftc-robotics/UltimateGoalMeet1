@@ -42,8 +42,18 @@ public class Default_Teleop extends Robot{
             telemetry.addData("Right Front Power", rightFrontPower);
             telemetry.update();
 
-            double IntakePower = gamepad1.left_trigger;
+            double IntakePower = gamepad2.left_trigger;
             intake.setPower(IntakePower);
+
+            if (gamepad2.a)
+                wobbleGoalServo.setPosition(1);
+            else
+                wobbleGoalServo.setPosition(0);
+
+            double wobbleGoalMotorPower = gamepad2.right_stick_y;
+            wobbleGoalMotor.setPower(wobbleGoalMotorPower);
+
+
         }
 
     }
