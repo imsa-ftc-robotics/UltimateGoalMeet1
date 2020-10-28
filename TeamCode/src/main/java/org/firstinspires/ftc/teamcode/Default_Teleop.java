@@ -42,13 +42,13 @@ public class Default_Teleop extends Robot{
             telemetry.addData("Right Front Power", rightFrontPower);
             telemetry.update();
 
-            double IntakePower = gamepad2.left_trigger;
+            double IntakePower = gamepad2.left_trigger-gamepad2.right_trigger;
             intake.setPower(IntakePower);
 
             if (gamepad2.a)
-                wobbleGoalServo.setPosition(1);
-            else
-                wobbleGoalServo.setPosition(0);
+                wobbleGoalServo.setPosition(WOBBLE_CLOSED);
+            if(gamepad2.b)
+                wobbleGoalServo.setPosition(WOBBLE_HALF);
 
             double wobbleGoalMotorPower = gamepad2.right_stick_y;
             wobbleGoalMotor.setPower(wobbleGoalMotorPower);
@@ -57,12 +57,13 @@ public class Default_Teleop extends Robot{
             arm.setPower(armPower);
 
             if (gamepad2.dpad_up)
-                tray.setPosition(1);
-
+                tray.setPosition(TRAY_NORMAL);
+            if(gamepad2.dpad_right)
+                tray.setPosition(TRAY_UP);
             if (gamepad2.dpad_down)
-                tray.setPosition(0);
+                tray.setPosition(TRAY_DOWN);
 
-            double intakeWinchPower = gamepad2.right_trigger;
+            double intakeWinchPower = gamepad1.right_trigger-gamepad1.left_trigger;
             intakeWinch.setPower(intakeWinchPower);
         }
 
