@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\TITANS_17576\\2020-2021\\Software\\UltimateGoal\\UltimateGoalMeet1\\TeamCode\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v11\\values-v11.xml",
+            "outputFile": "C:\\TITANS FTC\\UltimateGoalMeet1\\TeamCode\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v11\\values-v11.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\apate\\.gradle\\caches\\transforms-2\\files-2.1\\0482513baccc32f6fbd2547409ec7d7a\\jetified-RobotCore-6.0.1\\res\\values-v11\\values-v11.xml",
+                    "source": "C:\\Users\\Ritika and Nikki\\.gradle\\caches\\transforms-2\\files-2.1\\0482513baccc32f6fbd2547409ec7d7a\\jetified-RobotCore-6.0.1\\res\\values-v11\\values-v11.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
