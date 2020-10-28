@@ -49,8 +49,10 @@ public class Default_Teleop extends Robot{
                 wobbleGoalServo.setPosition(WOBBLE_CLOSED);
             if(gamepad2.b)
                 wobbleGoalServo.setPosition(WOBBLE_HALF);
+            if (gamepad2.x)
+                wobbleGoalMotor.setPower(WOBBLE_OPEN);
 
-            double wobbleGoalMotorPower = gamepad2.right_stick_y;
+            double wobbleGoalMotorPower = -gamepad2.right_stick_y;
             wobbleGoalMotor.setPower(wobbleGoalMotorPower);
 
             double armPower = gamepad2.left_stick_y;

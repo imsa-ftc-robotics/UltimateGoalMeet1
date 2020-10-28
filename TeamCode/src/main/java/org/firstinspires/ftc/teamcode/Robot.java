@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
@@ -60,11 +61,11 @@ public abstract class Robot extends LinearOpMode {
             leftBackDrive.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
             rightBackDrive = (DcMotorEx)hardwareMap.get("backRight");
-            rightBackDrive.setDirection((DcMotorEx.Direction.REVERSE));
+            rightBackDrive.setDirection((DcMotorEx.Direction.FORWARD));
             rightBackDrive.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
             leftFrontDrive = (DcMotorEx)hardwareMap.get("frontLeft");
-            leftFrontDrive.setDirection(DcMotorEx.Direction.FORWARD);
+            leftFrontDrive.setDirection(DcMotorEx.Direction.REVERSE);
             leftFrontDrive.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
             rightFrontDrive = (DcMotorEx)hardwareMap.get("frontRight");
