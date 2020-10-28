@@ -65,6 +65,7 @@ public class Default_Teleop extends Robot{
             if (gamepad2.dpad_down)
                 tray.setPosition(TRAY_DOWN);
 
+            //intake winch
             double intakeWinchPower = gamepad1.right_trigger-gamepad1.left_trigger;
             intakeWinch.setPower(intakeWinchPower);
         }
