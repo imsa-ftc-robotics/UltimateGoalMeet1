@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.drive.opmode;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -31,10 +33,12 @@ public class MaxVelocityTuner extends LinearOpMode {
 
     private VoltageSensor batteryVoltageSensor;
 
+    FtcDashboard dashboard = FtcDashboard.getInstance();
+
     @Override
     public void runOpMode() throws InterruptedException {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-
+        TelemetryPacket packet = new TelemetryPacket();
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         batteryVoltageSensor = hardwareMap.voltageSensor.iterator().next();
@@ -68,6 +72,11 @@ public class MaxVelocityTuner extends LinearOpMode {
         telemetry.addData("Max Velocity", maxVelocity);
         telemetry.addData("Voltage Compensated kF", effectiveKf * batteryVoltageSensor.getVoltage() / 12);
         telemetry.update();
+
+        packet.put("Max Velocity", maxVelocity);
+        packet.put("Voltage Compensated kF", effectiveKf*batteryVoltageSensor.getVoltage()/12);
+
+        dashboard.sendTelemetryPacket(packet);
 
         while (!isStopRequested() && opModeIsActive()) idle();
     }
