@@ -25,21 +25,18 @@ public abstract class Robot extends LinearOpMode {
     public DcMotorEx rightBackDrive;
     public DcMotorEx leftFrontDrive;
     public DcMotorEx rightFrontDrive;
+
+    public DcMotorEx shooter;
     public DcMotorEx wobbleGoalMotor;
     public DcMotorEx intake;
-    public DcMotor arm;
 
     public CRServo intakeWinch;
     public Servo wobbleGoalServo;
-    public Servo tray;
 
     public static final double WOBBLE_CLOSED = 0.03;
     public static final double WOBBLE_OPEN = 0.78;
     public static final double WOBBLE_HALF = 0.25;
 
-    public static final double TRAY_DOWN = 0;
-    public static final double TRAY_NORMAL = 0.41;
-    public static final double TRAY_UP = 0.64;
 
     public BNO055IMU imu;
 
@@ -78,11 +75,10 @@ public abstract class Robot extends LinearOpMode {
             intake = (DcMotorEx)hardwareMap.get("intake");
             intake.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-            arm = (DcMotorEx)hardwareMap.get("arm");
-            arm.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+            shooter = (DcMotorEx)hardwareMap.get("shooter");
+            shooter.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
             wobbleGoalServo =(Servo)hardwareMap.get("wobbleGoalServo");
-            tray = (Servo)hardwareMap.get("tray");
             intakeWinch = (CRServo)hardwareMap.get("intakeWinch");
 
             BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
