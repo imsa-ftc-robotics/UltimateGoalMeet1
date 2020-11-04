@@ -45,9 +45,9 @@ public class DriveConstants {
      * angular distances although most angular parameters are wrapped in Math.toRadians() for
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
-    public static double WHEEL_RADIUS = 1.9685; // in
+    public static double WHEEL_RADIUS = 1.88976; // in
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 16; // in
+    public static double TRACK_WIDTH = 14.8; // in
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -71,24 +71,24 @@ public class DriveConstants {
      * Note from LearnRoadRunner.com:
      * The velocity and acceleration constraints were calculated based on the following equation:
      * ((MAX_RPM / 60) * GEAR_RATIO * WHEEL_RADIUS * 2 * Math.PI) * 0.85
-     * Resulting in 54.66855022514893 in/s.
+     * Resulting in 52.48180821614297 in/s.
      * This is only 85% of the theoretical maximum velocity of the bot, following the recommendation above.
      * This is capped at 85% because there are a number of variables that will prevent your bot from actually
      * reaching this maximum velocity: voltage dropping over the game, bot weight, general mechanical inefficiences, etc.
-     * However, you can push this higher yourself if you'd like. Perhaps raise it to 90-95% of the theoretically
-     * max velocity. The theoreticaly maximum velocity is 64.31594144135168 in/s.
+     * However, you can push this higher yourself if you'd like. Perhaps raise it to 90-95% of the theoretically 
+     * max velocity. The theoreticaly maximum velocity is 61.74330378369762 in/s.
      * Just make sure that your bot can actually reach this maximum velocity. Path following will be detrimentally
      * affected if it is aiming for a velocity not actually possible.
-     *
+     * 
      * The maximum acceleration is somewhat arbitrary and it is recommended that you tweak this yourself based on
      * actual testing. Just set it at a reasonable value and keep increasing until your path following starts
-     * to degrade. As of now, it simply mirrors the velocity results in 54.66855022514893 in/s/s
+     * to degrade. As of now, it simply mirrors the velocity results in 52.48180821614297 in/s/s
      *
      * Maximum Angular Velocity is calculated as: maximum velocity / (trackWidth / 2) * (180 / Math.PI)
-
+     
      */
     public static DriveConstraints BASE_CONSTRAINTS = new DriveConstraints(
-            49.620584597155464, 49.620584597155464, 0.0,
+            52.48180821614297, 52.48180821614297, 0.0,
             Math.toRadians(360), Math.toRadians(360), 0.0
     );
 
@@ -102,7 +102,7 @@ public class DriveConstants {
     }
 
     public static double getMotorVelocityF(double ticksPerSecond) {
-        // see https://docs.google.com/document/d/1tyWrXDfMidwYyP_5H4mZyVgaEswhOC35gvdmP-V-5hA/edit#heading=h.61g9ixenznbx
-        return 32767 / ticksPerSecond;
+      // see https://docs.google.com/document/d/1tyWrXDfMidwYyP_5H4mZyVgaEswhOC35gvdmP-V-5hA/edit#heading=h.61g9ixenznbx
+      return 32767 / ticksPerSecond;
     }
 }
