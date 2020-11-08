@@ -29,6 +29,7 @@ public abstract class Robot extends LinearOpMode {
     public DcMotorEx shooter;
     public DcMotorEx wobbleGoalMotor;
     public DcMotorEx intake;
+    public DcMotorEx transfer;
 
     public CRServo intakeWinch;
     public Servo wobbleGoalServo;
@@ -54,11 +55,11 @@ public abstract class Robot extends LinearOpMode {
     public void runOpMode(){
         if (initialize_hardware){
             leftBackDrive = (DcMotorEx)hardwareMap.get("backLeft");
-            leftBackDrive.setDirection(DcMotorEx.Direction.REVERSE);
+            leftBackDrive.setDirection(DcMotorEx.Direction.FORWARD);
             leftBackDrive.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
             rightBackDrive = (DcMotorEx)hardwareMap.get("backRight");
-            rightBackDrive.setDirection((DcMotorEx.Direction.FORWARD));
+            rightBackDrive.setDirection((DcMotorEx.Direction.REVERSE));
             rightBackDrive.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
             leftFrontDrive = (DcMotorEx)hardwareMap.get("frontLeft");
@@ -77,6 +78,9 @@ public abstract class Robot extends LinearOpMode {
 
             shooter = (DcMotorEx)hardwareMap.get("shooter");
             shooter.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+
+            transfer = (DcMotorEx)hardwareMap.get("transfer");
+            transfer.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             wobbleGoalServo =(Servo)hardwareMap.get("wobbleGoalServo");
             intakeWinch = (CRServo)hardwareMap.get("intakeWinch");

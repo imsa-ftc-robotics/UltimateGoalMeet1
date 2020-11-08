@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp
@@ -11,6 +12,8 @@ public class Default_Teleop extends OpMode7573 {
 
     public void init7573() {
         this.shooter.setPower(0);
+        this.shooter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     @Override
@@ -74,8 +77,13 @@ public class Default_Teleop extends OpMode7573 {
         }
 
         //intake winch
-        double intakeWinchPower = gamepad1.right_trigger-gamepad1.left_trigger;
-        intakeWinch.setPower(intakeWinchPower);
+        if (gamepad1.right_bumper){
+            intakeWinch.setPower(1);
+        }
+        else if (gamepad1.left_bumper){
+            intakeWinch.setPower(-1);
+        }
+        else {intakeWinch.setPower(0);}
     }
 
     @Override
