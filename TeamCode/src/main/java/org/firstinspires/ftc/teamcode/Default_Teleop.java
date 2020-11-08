@@ -11,19 +11,19 @@ public class Default_Teleop extends Robot{
     public void op_mode() {
         double speedmultiplier = 1;
         waitForStart();
+        //shooter.setPower(-0.4);
         while (opModeIsActive()){
             // POV Mode uses left stick for translation, and right stick to turn.
-            shooter.setPower(0.6);
 
             double drive = -gamepad1.left_stick_y;
             double turn = gamepad1.right_stick_x;
             double strafe = gamepad1.left_stick_x;
 
 
-            double leftBackPower = Range.clip(((drive + turn - strafe)), -1.0, 1.0);
-            double rightBackPower = Range.clip(((drive - turn + strafe)), -1.0, 1.0);
-            double leftFrontPower = Range.clip(((drive + turn + strafe)), -1.0, 1.0);
-            double rightFrontPower = Range.clip(((drive - turn - strafe)), -1.0, 1.0);
+            double leftBackPower = Range.clip(((drive + turn - strafe)*0.5), -1.0, 1.0);
+            double rightBackPower = Range.clip(((drive - turn + strafe)*0.5), -1.0, 1.0);
+            double leftFrontPower = Range.clip(((drive + turn + strafe)*0.5), -1.0, 1.0);
+            double rightFrontPower = Range.clip(((drive - turn - strafe)*0.5), -1.0, 1.0);
 
 
             leftBackPower *= speedmultiplier;
@@ -56,17 +56,17 @@ public class Default_Teleop extends Robot{
 
             double wobbleGoalMotorPower = -gamepad2.right_stick_y;
             wobbleGoalMotor.setPower(wobbleGoalMotorPower);
-
+/*
             if(gamepad1.a){
-                shooter.setPower(1);
+                shooter.setPower(-1);
             }
             else if (gamepad1.b){
-                shooter.setPower(0.6);
+                shooter.setPower(-0.4);
             }
             else if (gamepad1.x){
                 shooter.setPower(0);
             }
-
+*/
             //intake winch
             double intakeWinchPower = gamepad1.right_trigger-gamepad1.left_trigger;
             intakeWinch.setPower(intakeWinchPower);

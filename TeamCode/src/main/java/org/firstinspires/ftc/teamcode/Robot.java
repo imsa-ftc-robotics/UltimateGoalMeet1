@@ -54,7 +54,7 @@ public abstract class Robot extends LinearOpMode {
     public void runOpMode(){
         if (initialize_hardware){
             leftBackDrive = (DcMotorEx)hardwareMap.get("backLeft");
-            leftBackDrive.setDirection(DcMotorEx.Direction.FORWARD);
+            leftBackDrive.setDirection(DcMotorEx.Direction.REVERSE);
             leftBackDrive.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
             rightBackDrive = (DcMotorEx)hardwareMap.get("backRight");
@@ -62,7 +62,7 @@ public abstract class Robot extends LinearOpMode {
             rightBackDrive.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
             leftFrontDrive = (DcMotorEx)hardwareMap.get("frontLeft");
-            leftFrontDrive.setDirection(DcMotorEx.Direction.REVERSE);
+            leftFrontDrive.setDirection(DcMotorEx.Direction.FORWARD);
             leftFrontDrive.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
             rightFrontDrive = (DcMotorEx)hardwareMap.get("frontRight");
