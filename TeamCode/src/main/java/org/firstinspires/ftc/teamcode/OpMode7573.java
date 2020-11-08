@@ -6,7 +6,7 @@ package org.firstinspires.ftc.teamcode;
  * An abstract op mode structured around Future7573. Methods named weirdly cause
  * they conflicted with stuff from LinearOpMode
  */
-public abstract class OpMode7573 extends Robot implements Future7573 {
+public abstract class OpMode7573 extends Robot {
     public final FutureManager futures = new FutureManager();
 
     /** Called as soon as the OP mode is initialized */
