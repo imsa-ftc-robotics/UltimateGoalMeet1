@@ -84,6 +84,8 @@ public class Default_Teleop extends OpMode7573 {
             intakeWinch.setPower(-1);
         }
         else {intakeWinch.setPower(0);}
+
+        transfer.setPower(gamepad1.left_trigger-gamepad1.right_trigger);
     }
 
     @Override
