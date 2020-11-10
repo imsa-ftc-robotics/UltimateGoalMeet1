@@ -49,8 +49,8 @@ public abstract class Robot extends LinearOpMode {
 
     public static Robot running_opmode;
 
-    private OpenCvInternalCamera phoneCam;
-    private RingDeterminationPipeline pipeline;
+    public OpenCvInternalCamera phoneCam;
+    public RingDeterminationPipeline pipeline;
 
     public void runOpMode(){
         if (initialize_hardware){
