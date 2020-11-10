@@ -252,6 +252,25 @@ public abstract class Robot extends LinearOpMode {
           stopDrivetrain();
     }
 
+    public void strafe(double power, int sleepTime){
+        resetDriveEncoders();
+
+        useEncoders();
+
+        leftBackDrive.setPower(-power);
+        leftFrontDrive.setPower(power);
+        rightBackDrive.setPower(power);
+        rightFrontDrive.setPower(-power);
+
+        sleep(sleepTime);
+
+        leftBackDrive.setPower(0);
+        leftFrontDrive.setPower(0);
+        rightBackDrive.setPower(0);
+        rightFrontDrive.setPower(0);
+    }
+
+
     public void stopDrivetrain(){
         leftBackDrive.setPower(0);
         leftFrontDrive.setPower(0);
