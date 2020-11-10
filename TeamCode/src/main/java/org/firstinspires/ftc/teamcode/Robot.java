@@ -55,11 +55,11 @@ public abstract class Robot extends LinearOpMode {
     public void runOpMode(){
         if (initialize_hardware){
             leftBackDrive = (DcMotorEx)hardwareMap.get("backLeft");
-            leftBackDrive.setDirection(DcMotorEx.Direction.FORWARD);
+            leftBackDrive.setDirection(DcMotorEx.Direction.REVERSE);
             leftBackDrive.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
             rightBackDrive = (DcMotorEx)hardwareMap.get("backRight");
-            rightBackDrive.setDirection((DcMotorEx.Direction.REVERSE));
+            rightBackDrive.setDirection((DcMotorEx.Direction.FORWARD));
             rightBackDrive.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
             leftFrontDrive = (DcMotorEx)hardwareMap.get("frontLeft");
@@ -99,7 +99,7 @@ public abstract class Robot extends LinearOpMode {
             imu = hardwareMap.get(BNO055IMU.class, "imu");
             imu.initialize(parameters);
 
-            int target_tollerance = 10;
+ /*           int target_tollerance = 10;
             double p = 7.2;
             leftBackDrive.setVelocityPIDFCoefficients(12.20372439*0.1, 12.20372439*0.01, 0, 12.20372439);
             leftBackDrive.setPositionPIDFCoefficients(p);
@@ -115,7 +115,7 @@ public abstract class Robot extends LinearOpMode {
 
             rightFrontDrive.setVelocityPIDFCoefficients(12.20372439*0.1, 12.20372439*0.01, 0, 12.20372439);
             rightFrontDrive.setPositionPIDFCoefficients(p);
-            rightFrontDrive.setTargetPositionTolerance(target_tollerance);
+            rightFrontDrive.setTargetPositionTolerance(target_tollerance);*/
         }
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -249,7 +249,7 @@ public abstract class Robot extends LinearOpMode {
             //make the last error equal to the current error
             lastError = error;
         }
-        stopDrivetrain();
+          stopDrivetrain();
     }
 
     public void stopDrivetrain(){
