@@ -22,9 +22,9 @@ public class ServoTesting extends Robot {
              */
 
             /* WOBBLE
-            completely open: 0.78
-            closed: 0.03
-            half open: 0.2
+            completely open: 0
+            closed: 0.85
+            half open: 0.5
             * */
         }
     }

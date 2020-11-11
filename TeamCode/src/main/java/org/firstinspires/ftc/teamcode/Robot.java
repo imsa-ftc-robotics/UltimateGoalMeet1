@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
@@ -34,9 +35,9 @@ public abstract class Robot extends LinearOpMode {
     public CRServo intakeWinch;
     public Servo wobbleGoalServo;
 
-    public static final double WOBBLE_CLOSED = 0.03;
-    public static final double WOBBLE_OPEN = 0.78;
-    public static final double WOBBLE_HALF = 0.25;
+    public static final double WOBBLE_CLOSED = 0.85;
+    public static final double WOBBLE_OPEN = 0;
+    public static final double WOBBLE_HALF = 0.5;
 
 
     public BNO055IMU imu;
@@ -49,7 +50,7 @@ public abstract class Robot extends LinearOpMode {
 
     public static Robot running_opmode;
 
-    public OpenCvInternalCamera phoneCam;
+    public OpenCvCamera webcam;
     public RingDeterminationPipeline pipeline;
 
     public void runOpMode(){
@@ -83,6 +84,7 @@ public abstract class Robot extends LinearOpMode {
             transfer.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             wobbleGoalServo =(Servo)hardwareMap.get("wobbleGoalServo");
+            wobbleGoalServo.setDirection(Servo.Direction.REVERSE);
             intakeWinch = (CRServo)hardwareMap.get("intakeWinch");
 
             BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
@@ -119,21 +121,21 @@ public abstract class Robot extends LinearOpMode {
         }
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        phoneCam = OpenCvCameraFactory.getInstance().createInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         pipeline = new RingDeterminationPipeline();
-        phoneCam.setPipeline(pipeline);
+        webcam.setPipeline(pipeline);
 
         // We set the viewport policy to optimized view so the preview doesn't appear 90 deg
         // out when the RC activity is in portrait. We do our actual image processing assuming
         // landscape orientation, though.
-        phoneCam.setViewportRenderingPolicy(OpenCvCamera.ViewportRenderingPolicy.OPTIMIZE_VIEW);
+        webcam.setViewportRenderingPolicy(OpenCvCamera.ViewportRenderingPolicy.OPTIMIZE_VIEW);
 
-        phoneCam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
+        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
         {
             @Override
             public void onOpened()
             {
-                phoneCam.startStreaming(320,240, OpenCvCameraRotation.SIDEWAYS_LEFT);
+                webcam.startStreaming(320,240, OpenCvCameraRotation.SIDEWAYS_LEFT);
             }
         });
 

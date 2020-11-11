@@ -44,7 +44,7 @@ public class Nov16Teleop extends Robot{
             if (gamepad2.x)
                 wobbleGoalServo.setPosition(WOBBLE_OPEN);
 
-            double wobbleGoalMotorPower = -gamepad2.right_stick_y;
+            double wobbleGoalMotorPower = gamepad2.right_stick_y;
             wobbleGoalMotor.setPower(wobbleGoalMotorPower);
 /*
             if(gamepad1.a){

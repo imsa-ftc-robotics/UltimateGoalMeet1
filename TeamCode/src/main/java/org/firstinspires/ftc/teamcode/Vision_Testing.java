@@ -10,7 +10,7 @@ public class Vision_Testing extends Robot{
     @Override
     public void op_mode() {
 
-        FtcDashboard.getInstance().startCameraStream(phoneCam, 30);
+        FtcDashboard.getInstance().startCameraStream(webcam, 30);
         waitForStart();
 
         while (opModeIsActive()) {
