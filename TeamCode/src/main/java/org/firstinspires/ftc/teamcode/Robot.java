@@ -35,8 +35,8 @@ public abstract class Robot extends LinearOpMode {
     public CRServo intakeWinch;
     public Servo wobbleGoalServo;
 
-    public static final double WOBBLE_CLOSED = 0.85;
-    public static final double WOBBLE_OPEN = 0;
+    public static final double WOBBLE_CLOSED = 0.8;
+    public static final double WOBBLE_OPEN = 0.1;
     public static final double WOBBLE_HALF = 0.5;
 
 
@@ -64,11 +64,11 @@ public abstract class Robot extends LinearOpMode {
             rightBackDrive.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
             leftFrontDrive = (DcMotorEx)hardwareMap.get("frontLeft");
-            leftFrontDrive.setDirection(DcMotorEx.Direction.FORWARD);
+            leftFrontDrive.setDirection(DcMotorEx.Direction.REVERSE);
             leftFrontDrive.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
             rightFrontDrive = (DcMotorEx)hardwareMap.get("frontRight");
-            rightFrontDrive.setDirection(DcMotorEx.Direction.REVERSE);
+            rightFrontDrive.setDirection(DcMotorEx.Direction.FORWARD);
             rightFrontDrive.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
             wobbleGoalMotor =(DcMotorEx)hardwareMap.get("wobbleGoal");
