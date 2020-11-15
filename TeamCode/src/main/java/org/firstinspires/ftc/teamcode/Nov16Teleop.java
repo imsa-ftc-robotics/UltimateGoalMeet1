@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp
@@ -10,15 +11,15 @@ public class Nov16Teleop extends Robot{
 
 
         waitForStart();
-        //shooter.setPower(-0.4);
+        shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         while (opModeIsActive()){
             double drive = -gamepad1.left_stick_y;
             double turn = gamepad1.right_stick_x;
             double strafe = gamepad1.left_stick_x;
 
 
-            double leftBackPower = Range.clip(((drive + turn - strafe)*0.5), -1.0, 1.0);
-            double rightBackPower = Range.clip(((drive - turn + strafe)*0.5), -1.0, 1.0);
+            double leftBackPower = Range.clip(((drive - turn + strafe)*0.5), -1.0, 1.0);
+            double rightBackPower = Range.clip(((drive + turn - strafe)*0.5), -1.0, 1.0);
             double leftFrontPower = Range.clip(((drive - turn - strafe)*0.5), -1.0, 1.0);
             double rightFrontPower = Range.clip(((drive + turn + strafe)*0.5), -1.0, 1.0);
 
@@ -46,7 +47,7 @@ public class Nov16Teleop extends Robot{
 
             double wobbleGoalMotorPower = gamepad2.right_stick_y;
             wobbleGoalMotor.setPower(wobbleGoalMotorPower);
-/*
+
             if(gamepad1.a){
                 shooter.setPower(-1);
             }
@@ -56,7 +57,7 @@ public class Nov16Teleop extends Robot{
             else if (gamepad1.x){
                 shooter.setPower(0);
             }
-*/
+
             //intake winch
             if (gamepad1.right_bumper){
                 intakeWinch.setPower(1);
@@ -66,7 +67,7 @@ public class Nov16Teleop extends Robot{
             }
             else {intakeWinch.setPower(0);}
 
-            transfer.setPower(gamepad1.left_trigger-gamepad1.right_trigger);
+            transfer.setPower(gamepad2.left_stick_y);
 
         }
     }

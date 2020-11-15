@@ -35,7 +35,7 @@ public abstract class Robot extends LinearOpMode {
     public CRServo intakeWinch;
     public Servo wobbleGoalServo;
 
-    public static final double WOBBLE_CLOSED = 0.8;
+    public static final double WOBBLE_CLOSED = 0.75;
     public static final double WOBBLE_OPEN = 0.1;
     public static final double WOBBLE_HALF = 0.5;
 
