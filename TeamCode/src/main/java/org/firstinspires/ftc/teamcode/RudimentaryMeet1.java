@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.teamcode.DropPosition;
@@ -14,12 +16,12 @@ public class RudimentaryMeet1 extends Robot  {
 
     @Override
     public void op_mode() {
-
+        wobbleGoalMotor.setDirection(DcMotorEx.Direction.REVERSE);
         waitForStart();
 
         //grab onto wobble goal
-        wobbleGoalMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        wobbleGoalMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //wobbleGoalMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //wobbleGoalMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         wobbleGoalMotor.setPower(-0.4);
         sleep(450);
         wobbleGoalMotor.setPower(0);
