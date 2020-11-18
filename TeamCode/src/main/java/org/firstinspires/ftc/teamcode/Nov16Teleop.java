@@ -11,17 +11,36 @@ public class Nov16Teleop extends Robot{
 
 
         waitForStart();
+        shooter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        wobbleGoalMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        wobbleGoalMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        double shift;
+        double reverse;
         while (opModeIsActive()){
             double drive = -gamepad1.left_stick_y;
             double turn = gamepad1.right_stick_x;
             double strafe = gamepad1.left_stick_x;
 
+            if (gamepad1.right_bumper){
+                shift = 0.5;
+            }
+            else {
+                shift = 1;
+            }
 
-            double leftBackPower = Range.clip(((drive - turn + strafe)*0.5), -1.0, 1.0);
-            double rightBackPower = Range.clip(((drive + turn - strafe)*0.5), -1.0, 1.0);
-            double leftFrontPower = Range.clip(((drive - turn - strafe)*0.5), -1.0, 1.0);
-            double rightFrontPower = Range.clip(((drive + turn + strafe)*0.5), -1.0, 1.0);
+            if (gamepad1.left_bumper){
+                reverse = -1;
+            }
+            else {
+                reverse = 1;
+            }
+
+
+            double leftBackPower = Range.clip((((drive*reverse) + turn - (strafe*reverse))*shift), -1.0, 1.0);
+            double rightBackPower = Range.clip((((drive*reverse) - turn + (strafe*reverse))*shift), -1.0, 1.0);
+            double leftFrontPower = Range.clip((((drive*reverse) + turn + (strafe*reverse))*shift), -1.0, 1.0);
+            double rightFrontPower = Range.clip((((drive*reverse) - turn - (strafe*reverse))*shift*reverse), -1.0, 1.0);
 
             leftBackDrive.setPower(leftBackPower);
             leftFrontDrive.setPower(leftFrontPower);
@@ -45,29 +64,39 @@ public class Nov16Teleop extends Robot{
             if (gamepad2.x)
                 wobbleGoalServo.setPosition(WOBBLE_OPEN);
 
-            double wobbleGoalMotorPower = gamepad2.right_stick_y;
+            double wobbleGoalMotorPower = -gamepad2.right_stick_y*0.5;
             wobbleGoalMotor.setPower(wobbleGoalMotorPower);
 
             if(gamepad1.a){
-                shooter.setPower(-1);
+                shooter.setPower(-0.65);
             }
             else if (gamepad1.b){
                 shooter.setPower(-0.4);
             }
+            else if (gamepad1.y){
+                shooter.setPower(-0.2);
+            }
             else if (gamepad1.x){
+                shooter.setPower(0);
+            }
+            else if (gamepad2.y){
                 shooter.setPower(0);
             }
 
             //intake winch
-            if (gamepad1.right_bumper){
+            if (gamepad2.right_bumper){
                 intakeWinch.setPower(1);
             }
-            else if (gamepad1.left_bumper){
+            else if (gamepad2.left_bumper){
                 intakeWinch.setPower(-1);
             }
             else {intakeWinch.setPower(0);}
 
             transfer.setPower(gamepad2.left_stick_y);
+
+            telemetry.addData("shooter encoder", shooter.getCurrentPosition());
+            telemetry.addData("shooter velocity", shooter.getVelocity());
+            telemetry.update();
 
         }
     }
