@@ -43,31 +43,41 @@ public class RudimentaryMeet1 extends Robot  {
                 reorientIMU(0, -0.5, 0.5, 0.5, 1.5, 0.001, 0);
                 sleep(300);
 
-                strafeAngle(0.5,   180, 1500);
+                strafeAngle(0.5,   180, 1700);
 
                 sleep(300);
 
                 wobbleGoalServo.setPosition(WOBBLE_OPEN);
 
                 moveToPosition(0.7, (int)(-TICKS_PER_INCH*12*5.4));
-                wobbleGoalMotor.setPower(0.4);
-                sleep(450);
-                wobbleGoalMotor.setPower(0);
+                //wobbleGoalMotor.setPower(0.4);
+                //sleep(400);
+                //wobbleGoalMotor.setPower(0);
 
-                strafe(0.5, 1500);
-                moveToPosition(0.5, (int)(-TICKS_PER_INCH*12*3.1));
+                strafe(0.5, 1700);
+                moveToPosition(0.5, (int)(-TICKS_PER_INCH*12*3.4));
+                wobbleGoalMotor.setPower(0.4);
+                sleep(250);
+                wobbleGoalMotor.setPower(0);
+                wobbleGoalServo.setPosition(WOBBLE_HALF);
                 reorientIMU(0, -0.5,0.5,0.5, 1.5, 0.001, 0);
-                strafe(-0.5, 1200);
+                strafe(-0.5, 1250);
                 sleep(500);
 
                 wobbleGoalServo.setPosition(WOBBLE_CLOSED);
-                sleep(500);
+                sleep(700);
 
                 wobbleGoalMotor.setPower(-0.4);
-                sleep(400);
+                sleep(450);
                 wobbleGoalMotor.setPower(0);
 
-                strafe(-0.5, 700);
+                strafe(-0.5, 650);
+                moveToPosition(0.7, (int)(TICKS_PER_INCH*12*10.1));
+
+                wobbleGoalServo.setPosition(WOBBLE_OPEN);
+                sleep(500);
+
+                moveToPosition(0.5, -(int)(TICKS_PER_INCH*12*5.1));
                 break;
 
             case 1:
