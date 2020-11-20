@@ -19,6 +19,10 @@ public class RudimentaryMeet1 extends Robot  {
         wobbleGoalMotor.setDirection(DcMotorEx.Direction.REVERSE);
         waitForStart();
 
+        DropPosition position = getDropPosition();
+        telemetry.addData("position", position);
+        telemetry.update();
+
         //grab onto wobble goal
         //wobbleGoalMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //wobbleGoalMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -35,9 +39,9 @@ public class RudimentaryMeet1 extends Robot  {
 
         strafe(0.5, 300);
 
-        int positionHolder = 2;
-        switch (positionHolder){
-            case 2:
+
+        switch (position){
+            case Far:
                 strafe(0.5, 400);
                 moveToPosition(0.7, (int)(TICKS_PER_INCH*12*10.1));
                 reorientIMU(0, -0.5, 0.5, 0.5, 1.5, 0.001, 0);
@@ -48,21 +52,21 @@ public class RudimentaryMeet1 extends Robot  {
                 sleep(300);
 
                 wobbleGoalServo.setPosition(WOBBLE_OPEN);
-
+                sleep(500);
                 moveToPosition(0.7, (int)(-TICKS_PER_INCH*12*5.4));
                 //wobbleGoalMotor.setPower(0.4);
                 //sleep(400);
                 //wobbleGoalMotor.setPower(0);
 
                 strafe(0.5, 1700);
-                moveToPosition(0.5, (int)(-TICKS_PER_INCH*12*3.4));
+                moveToPosition(0.5, (int)(-TICKS_PER_INCH*12*3.5));
                 wobbleGoalMotor.setPower(0.4);
                 sleep(250);
                 wobbleGoalMotor.setPower(0);
                 wobbleGoalServo.setPosition(WOBBLE_HALF);
                 reorientIMU(0, -0.5,0.5,0.5, 1.5, 0.001, 0);
-                strafe(-0.5, 1250);
-                sleep(500);
+                strafe(-0.4, 1550);
+                sleep(700);
 
                 wobbleGoalServo.setPosition(WOBBLE_CLOSED);
                 sleep(700);
@@ -71,16 +75,19 @@ public class RudimentaryMeet1 extends Robot  {
                 sleep(450);
                 wobbleGoalMotor.setPower(0);
 
-                strafe(-0.5, 650);
-                moveToPosition(0.7, (int)(TICKS_PER_INCH*12*10.1));
+                strafe(-0.5, 600);
+                reorientIMU(0, -0.5,0.5,0.5, 1.5, 0.001, 0);
+                moveToPosition(0.7, (int)(TICKS_PER_INCH*12*9.55));
 
                 wobbleGoalServo.setPosition(WOBBLE_OPEN);
                 sleep(500);
 
-                moveToPosition(0.5, -(int)(TICKS_PER_INCH*12*5.1));
+                strafe(0.4, 500);
+
+                moveToPosition(0.5, (int)(-TICKS_PER_INCH*12*4.2));
                 break;
 
-            case 1:
+            case Middle:
                 strafe(0.5, 400);
                 moveToPosition(0.7, (int)(TICKS_PER_INCH*12*8.1));
                 sleep(300);
@@ -129,8 +136,59 @@ public class RudimentaryMeet1 extends Robot  {
                 moveToPosition(0.5, (int)(-TICKS_PER_INCH*12*2.25));
 
                 break;
+            case Near:
+                moveToPosition(0.7, TICKS_PER_INCH*12*6);
+                sleep(300);
 
-            case 0:
+                reorientIMU(0, -0.5, 0.5, 0.5, 1.5, 0.001, 0);
+                strafeAngle(0.5, 180, 1400);
+                sleep(300);
+
+                wobbleGoalServo.setPosition(WOBBLE_OPEN);
+                sleep(400);
+
+                strafeAngle(0.5,0,450);
+
+                wobbleGoalMotor.setPower(0.4);
+                sleep(450);
+                wobbleGoalMotor.setPower(0);
+
+                moveToPosition(0.7, (int)(-TICKS_PER_INCH*12*2.2));
+                sleep(300);
+
+                reorientIMU(90, -0.5, 0.5, 1, 1.5, 0, 0);
+                sleep(200);
+
+                wobbleGoalServo.setPosition(WOBBLE_HALF);
+                sleep(200);
+                strafeAngle(0.5, 180, 650);
+                sleep(1000);
+                wobbleGoalServo.setPosition(WOBBLE_CLOSED);
+                sleep(500);
+
+                wobbleGoalMotor.setPower(-0.4);
+                sleep(500);
+                wobbleGoalMotor.setPower(0);
+
+                reorientIMU(0, -0.5, 0.5, 1, 1.5, 0, 0);
+                sleep(200);
+
+                moveToPosition(0.6, (int)(TICKS_PER_INCH*12*2.7));
+                sleep(1000);
+
+                wobbleGoalMotor.setPower(0.4);
+                sleep(400);
+                wobbleGoalMotor.setPower(0);
+                sleep(200);
+
+                wobbleGoalServo.setPosition(WOBBLE_OPEN);
+                sleep(200);
+
+                strafeAngle(0.5,0, 500);
+                break;
+
+            default:
+
                 moveToPosition(0.7, TICKS_PER_INCH*12*6);
                 sleep(300);
 

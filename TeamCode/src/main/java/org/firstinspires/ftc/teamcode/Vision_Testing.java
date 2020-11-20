@@ -11,10 +11,12 @@ public class Vision_Testing extends Robot{
     public void op_mode() {
 
         FtcDashboard.getInstance().startCameraStream(webcam, 30);
+
         waitForStart();
 
         while (opModeIsActive()) {
             telemetry.addData("Drop position", getDropPosition());
+            telemetry.addData("value", pipeline.avg1);
             telemetry.update();
             try {
                 Thread.sleep(100);
