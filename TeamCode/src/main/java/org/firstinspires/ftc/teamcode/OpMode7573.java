@@ -20,7 +20,12 @@ public abstract class OpMode7573 extends Robot {
 
     @Override public void op_mode() {
         this.init7573();
-        while (!isStarted()) this.futures.poll();
+        while (!isStarted()) {
+            this.futures.poll();
+            try {
+                Thread.sleep(60);
+            } catch (InterruptedException e) { }
+        }
         if (opModeIsActive()) {
             this.start7573();
             while (opModeIsActive()) {
