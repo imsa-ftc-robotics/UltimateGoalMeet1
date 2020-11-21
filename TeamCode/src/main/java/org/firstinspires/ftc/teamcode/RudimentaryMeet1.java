@@ -19,15 +19,20 @@ public class RudimentaryMeet1 extends Robot  {
     public void op_mode() {
         wobbleGoalMotor.setDirection(DcMotorEx.Direction.REVERSE);
         waitForStart();
-        DropPosition position = DropPosition.Middle;
-        /*double initialTime = runtime.milliseconds();
-        while (runtime.milliseconds()<initialTime+1000) {
-            telemetry.addData("position", getDropPosition());
-            telemetry.addData("value", pipeline.avg1);
+        double value = pipeline.avg1;
+        DropPosition position;
+        position=getDropPosition();
+        while (pipeline.avg1 ==0 && !isStopRequested()) {
+            value = pipeline.avg1;
+            position = getDropPosition();
+            telemetry.addData("position", position);
+            telemetry.addData("value", value);
+            telemetry.addData("still", "in loop");
             telemetry.update();
-            position=getDropPosition();
-        }*/
+        }
 
+
+        sleep(20000000);
         //grab onto wobble goal
         //wobbleGoalMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //wobbleGoalMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -108,7 +113,7 @@ public class RudimentaryMeet1 extends Robot  {
                 sleep(300);
                 strafe(0.5, 500);
                 sleep(200);
-                moveToPosition(0.7, (int)(-TICKS_PER_INCH*12*6.8));
+                moveToPosition(0.7, (int)(-TICKS_PER_INCH*12*6.77));
                 wobbleGoalServo.setPosition(WOBBLE_HALF);
 
                 strafe(-0.4, 1650);
