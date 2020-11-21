@@ -22,13 +22,18 @@ public class RudimentaryMeet1 extends Robot  {
         double value = pipeline.avg1;
         DropPosition position;
         position=getDropPosition();
-        while (pipeline.avg1 ==0 && !isStopRequested()) {
+        while (value ==0 && !isStopRequested()) {
             value = pipeline.avg1;
             position = getDropPosition();
             telemetry.addData("position", position);
             telemetry.addData("value", value);
             telemetry.addData("still", "in loop");
             telemetry.update();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
 
