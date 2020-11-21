@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.teamcode.DropPosition;
@@ -12,22 +13,26 @@ import java.util.ServiceLoader;
 
 @Autonomous
 public class RudimentaryMeet1 extends Robot  {
-
+    ElapsedTime runtime = new ElapsedTime();
 
     @Override
     public void op_mode() {
         wobbleGoalMotor.setDirection(DcMotorEx.Direction.REVERSE);
         waitForStart();
-
-        DropPosition position = getDropPosition();
-        telemetry.addData("position", position);
-        telemetry.update();
+        DropPosition position = DropPosition.Middle;
+        /*double initialTime = runtime.milliseconds();
+        while (runtime.milliseconds()<initialTime+1000) {
+            telemetry.addData("position", getDropPosition());
+            telemetry.addData("value", pipeline.avg1);
+            telemetry.update();
+            position=getDropPosition();
+        }*/
 
         //grab onto wobble goal
         //wobbleGoalMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //wobbleGoalMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         wobbleGoalMotor.setPower(-0.4);
-        sleep(450);
+        sleep(500);
         wobbleGoalMotor.setPower(0);
 
         wobbleGoalServo.setPosition(WOBBLE_CLOSED);
@@ -65,7 +70,7 @@ public class RudimentaryMeet1 extends Robot  {
                 wobbleGoalMotor.setPower(0);
                 wobbleGoalServo.setPosition(WOBBLE_HALF);
                 reorientIMU(0, -0.5,0.5,0.5, 1.5, 0.001, 0);
-                strafe(-0.4, 1550);
+                strafe(-0.4, 1600);
                 sleep(700);
 
                 wobbleGoalServo.setPosition(WOBBLE_CLOSED);
@@ -103,10 +108,10 @@ public class RudimentaryMeet1 extends Robot  {
                 sleep(300);
                 strafe(0.5, 500);
                 sleep(200);
-                moveToPosition(0.7, (int)(-TICKS_PER_INCH*12*6.65));
+                moveToPosition(0.7, (int)(-TICKS_PER_INCH*12*6.8));
                 wobbleGoalServo.setPosition(WOBBLE_HALF);
 
-                strafe(-0.4, 1500);
+                strafe(-0.4, 1650);
                 sleep(800);
 
                 wobbleGoalServo.setPosition(WOBBLE_CLOSED);
@@ -147,10 +152,10 @@ public class RudimentaryMeet1 extends Robot  {
                 wobbleGoalServo.setPosition(WOBBLE_OPEN);
                 sleep(400);
 
-                strafeAngle(0.5,0,450);
+                strafeAngle(0.5,0,250);
 
                 wobbleGoalMotor.setPower(0.4);
-                sleep(450);
+                sleep(350);
                 wobbleGoalMotor.setPower(0);
 
                 moveToPosition(0.7, (int)(-TICKS_PER_INCH*12*2.2));
