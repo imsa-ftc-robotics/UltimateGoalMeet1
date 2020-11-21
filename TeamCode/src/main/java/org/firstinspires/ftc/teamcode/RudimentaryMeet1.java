@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -18,7 +20,10 @@ public class RudimentaryMeet1 extends Robot  {
     @Override
     public void op_mode() {
         wobbleGoalMotor.setDirection(DcMotorEx.Direction.REVERSE);
+        FtcDashboard dashboard = FtcDashboard.getInstance();
+
         waitForStart();
+        runtime.reset();
         double value = pipeline.avg1;
         DropPosition position;
         position=getDropPosition();
@@ -29,15 +34,32 @@ public class RudimentaryMeet1 extends Robot  {
             telemetry.addData("value", value);
             telemetry.addData("still", "in loop");
             telemetry.update();
+            TelemetryPacket packet = new TelemetryPacket();
+            packet.put("position", position);
+            packet.put("value", value);
+            packet.put("loop?", "yes");
+            dashboard.sendTelemetryPacket(packet);
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            if (getRuntime() > 5000){
+                break;
+            }
         }
+        TelemetryPacket packet = new TelemetryPacket();
+        packet.put("position", position);
+        packet.put("value", value);
+        packet.put("loop?", "no");
+        dashboard.sendTelemetryPacket(packet);
+        value = pipeline.avg1;
+        position = getDropPosition();
+        telemetry.addData("position", position);
+        telemetry.addData("value", value);
+        telemetry.addData("still", "no");
+        telemetry.update();
 
-
-        sleep(20000000);
         //grab onto wobble goal
         //wobbleGoalMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //wobbleGoalMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
