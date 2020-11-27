@@ -18,42 +18,44 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvInternalCamera;
 
 public abstract class Robot extends LinearOpMode {
 
+    //statiing the drive train motors
     public DcMotorEx leftBackDrive;
     public DcMotorEx rightBackDrive;
     public DcMotorEx leftFrontDrive;
     public DcMotorEx rightFrontDrive;
-
+    //declaring the superstructure motors
     public DcMotorEx shooter;
     public DcMotorEx wobbleGoalMotor;
     public DcMotorEx intake;
     public DcMotorEx transfer;
-
+    //declaring servos
     public CRServo intakeWinch;
     public Servo wobbleGoalServo;
-
+    //declaring constants for wobble goal positions
     public static final double WOBBLE_CLOSED = 0.75;
     public static final double WOBBLE_OPEN = 0.1;
     public static final double WOBBLE_HALF = 0.5;
 
-
+    //declaring imu
     public BNO055IMU imu;
 
     public Orientation angles;
-
+    //declaring the drive motor constants
     public static final int TICKS_PER_INCH = 537 / 12;
-
+    //declaring initializing is true
     protected boolean initialize_hardware = true;
-
+    //holds reference to which opmode is running
     public static Robot running_opmode;
-
+    //declaring the camera
     public OpenCvCamera webcam;
+    //creating the vision pipeline
     public RingDeterminationPipeline pipeline;
 
     public void runOpMode(){
+        //initialize hardware
         if (initialize_hardware){
             leftBackDrive = (DcMotorEx)hardwareMap.get("backLeft");
             leftBackDrive.setDirection(DcMotorEx.Direction.REVERSE);
@@ -119,7 +121,7 @@ public abstract class Robot extends LinearOpMode {
             rightFrontDrive.setPositionPIDFCoefficients(p);
             rightFrontDrive.setTargetPositionTolerance(target_tollerance);*/
         }
-
+        //intializing the webcam from the hardwareMap
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         pipeline = new RingDeterminationPipeline();
@@ -146,13 +148,14 @@ public abstract class Robot extends LinearOpMode {
             running_opmode = null;
         }
     }
+    //resets the motor encoder on the drive train
     public void resetDriveEncoders(){
         leftFrontDrive.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
         leftBackDrive.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
         rightFrontDrive.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
         rightBackDrive.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
     }
-
+    //moves the drive train motors to a set position
     public void moveToPosition(double motorPower, int ticks){
         resetDriveEncoders();
 
@@ -192,11 +195,11 @@ public abstract class Robot extends LinearOpMode {
 
     }
 
-
+    //gets where to drop wobble goal
     public DropPosition getDropPosition() { return pipeline.getDropPosition(); }
-
+    //declaring the method for child classes
     public abstract void op_mode();
-
+    //heading of IMU
     public double getFirstAngle(){
         return imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.RADIANS).firstAngle;
     }
@@ -208,7 +211,7 @@ public abstract class Robot extends LinearOpMode {
     public double getThirdAngle(){
         return imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.RADIANS).thirdAngle;
     }
-
+    //PID algorithim to set robot at specific heading
     public void reorientIMU(double targetAngle, double left, double right, double threshold, double kp, double ki, double kd) {
         //get the current value in radians
         double currentValue = getFirstAngle();
@@ -252,7 +255,7 @@ public abstract class Robot extends LinearOpMode {
         }
           stopDrivetrain();
     }
-
+    //strafe right or left for a specified amount of time
     public void strafe(double power, int sleepTime){
         resetDriveEncoders();
 
@@ -271,14 +274,14 @@ public abstract class Robot extends LinearOpMode {
         rightFrontDrive.setPower(0);
     }
 
-
+    //kills the drive train motors
     public void stopDrivetrain(){
         leftBackDrive.setPower(0);
         leftFrontDrive.setPower(0);
         rightFrontDrive.setPower(0);
         rightBackDrive.setPower(0);
     }
-
+    //run mode to use encoder
     public void useEncoders(){
         leftFrontDrive.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
         leftBackDrive.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
@@ -290,7 +293,7 @@ public abstract class Robot extends LinearOpMode {
         rightBackDrive.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         rightFrontDrive.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
     }
-
+    //move using encoder for a specified amount of time
     public void moveWithEncoders(double motorPower, int sleepTime){
         useEncoders();
 
@@ -306,7 +309,7 @@ public abstract class Robot extends LinearOpMode {
         rightBackDrive.setPower(0);
         rightFrontDrive.setPower(0);
     }
-
+        //strafe at the specified angle at specified time
     public void strafeAngle(double speed, double degrees, int sleepTime){
         //set runmode to RUN_USING_ENCODERS
         useEncoders();
@@ -358,7 +361,7 @@ public abstract class Robot extends LinearOpMode {
 
         stopDrivetrain();
     }
-
+    //using PID algorithm to make sure it strafes in a straight line
     public void strafingPID(double motorPower, double sleepTime, double kp, double ki, double kd){
         double targetAngle = getFirstAngle();
         double targetTime = getRuntime()+(sleepTime/1000);
@@ -375,7 +378,7 @@ public abstract class Robot extends LinearOpMode {
         double lastError = 0;
         double outputChange;
 
-
+        //measuring the error and integral and sets the motor power based on the PID
         while ((getRuntime()<targetTime)&&!isStopRequested()){
             error = targetAngle-getFirstAngle();
             integral += error;

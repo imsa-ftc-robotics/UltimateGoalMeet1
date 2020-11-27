@@ -33,7 +33,7 @@ public class RingDeterminationPipeline extends OpenCvPipeline {
     static final int REGION_WIDTH = 35;
     static final int REGION_HEIGHT = 25;
 
-    final int FOUR_RING_THRESHOLD = 150;
+    final int FOUR_RING_THRESHOLD = 147;
     final int ONE_RING_THRESHOLD = 135;
 
     Point region1_pointA = new Point(
@@ -49,7 +49,7 @@ public class RingDeterminationPipeline extends OpenCvPipeline {
     Mat region1_Cb;
     Mat YCrCb = new Mat();
     Mat Cb = new Mat();
-    int avg1;
+    public int avg1;
 
     // Volatile since accessed by OpMode thread w/o synchronization
     private volatile RingPosition position = RingPosition.FOUR;

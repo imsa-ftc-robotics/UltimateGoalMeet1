@@ -1,11 +1,13 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.TestingAndSamples;
 
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.Robot;
+
 @TeleOp
-public class Vision_Testing extends Robot{
+public class Vision_Testing extends Robot {
 
     @Override
     public void op_mode() {
