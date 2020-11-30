@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import org.firstinspires.ftc.teamcode.Robot;
 
 @Autonomous
-@Disabled
+//@Disabled
 public class DrivetrainTest extends Robot {
 
     public void op_mode(){
