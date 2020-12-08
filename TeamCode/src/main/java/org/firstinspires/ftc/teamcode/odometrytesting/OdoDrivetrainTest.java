@@ -5,8 +5,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import kotlin.internal.RequireKotlinVersionKind;
-
 @TeleOp
 public class OdoDrivetrainTest extends LinearOpMode {
     private DcMotorEx lf, rf, rb, lb;

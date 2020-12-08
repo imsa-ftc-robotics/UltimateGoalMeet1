@@ -39,6 +39,7 @@ public abstract class Robot extends LinearOpMode {
     public static final double WOBBLE_OPEN = 0.1;
     public static final double WOBBLE_HALF = 0.5;
 
+    public Servo transferServo;
     //declaring imu
     public BNO055IMU imu;
 
@@ -85,6 +86,7 @@ public abstract class Robot extends LinearOpMode {
             transfer = (DcMotorEx)hardwareMap.get("transfer");
             transfer.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+            transferServo = (Servo)hardwareMap.get("transferServo");
             wobbleGoalServo =(Servo)hardwareMap.get("wobbleGoalServo");
             wobbleGoalServo.setDirection(Servo.Direction.REVERSE);
             intakeWinch = (CRServo)hardwareMap.get("intakeWinch");

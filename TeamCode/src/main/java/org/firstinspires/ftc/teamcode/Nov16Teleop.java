@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp
@@ -11,8 +13,9 @@ public class Nov16Teleop extends Robot{
 
 
         waitForStart();
-        shooter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //shooter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooter.setDirection(DcMotorEx.Direction.REVERSE);
         wobbleGoalMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         wobbleGoalMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         double shift;
@@ -68,13 +71,10 @@ public class Nov16Teleop extends Robot{
             wobbleGoalMotor.setPower(wobbleGoalMotorPower);
 
             if(gamepad1.a){
-                shooter.setPower(-1);
+                shooter.setPower(0.6);
             }
             else if (gamepad1.b){
-                shooter.setPower(-0.5);
-            }
-            else if (gamepad1.y){
-                shooter.setPower(-0.2);
+                shooter.setPower(0.68);
             }
             else if (gamepad1.x){
                 shooter.setPower(0);
@@ -94,8 +94,7 @@ public class Nov16Teleop extends Robot{
 
             transfer.setPower(gamepad2.left_stick_y);
 
-            telemetry.addData("shooter encoder", shooter.getCurrentPosition());
-            telemetry.addData("shooter velocity", shooter.getVelocity());
+            telemetry.addData("shooter velocity", shooter.getPower());
             telemetry.update();
 
         }

@@ -13,8 +13,8 @@ public class ServoTesting extends Robot {
     public void op_mode() {
         waitForStart();
         while(!isStopRequested()){
-            wobbleGoalServo.setPosition(gamepad1.left_trigger);
-            telemetry.addData("wobble", wobbleGoalServo.getPosition());
+            transferServo.setPosition(gamepad1.left_trigger);
+            telemetry.addData("position", transferServo.getPosition());
             telemetry.update();
 
             /*tray

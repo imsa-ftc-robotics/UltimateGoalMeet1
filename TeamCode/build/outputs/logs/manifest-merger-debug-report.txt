@@ -18,7 +18,7 @@ MERGED from [org.firstinspires.ftc:Blocks:6.0.1] C:\Users\apate\.gradle\caches\t
 MERGED from [org.firstinspires.ftc:RobotServer:6.0.1] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\cff72f9ec5003fe674a4e984771c3d43\jetified-RobotServer-6.0.1\AndroidManifest.xml:2:1-11:12
 MERGED from [org.firstinspires.ftc:OnBotJava:6.0.1] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\5fd033806c529e56035eed6c54fff3ca\jetified-OnBotJava-6.0.1\AndroidManifest.xml:34:1-43:12
 MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\bf96d2b5a86ecd602a621e7e96856420\appcompat-1.2.0\AndroidManifest.xml:17:1-24:12
-MERGED from [com.github.FTCLib.FTCLib:ftclib:dev-SNAPSHOT] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\b104bdd68ed36e2cf33b2390ff78abd1\jetified-ftclib-dev-SNAPSHOT\AndroidManifest.xml:2:1-11:12
+MERGED from [com.github.FTCLib.FTCLib:ftclib:dev-SNAPSHOT] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\b068c2745880e0068c289255bb2bebe4\jetified-ftclib-dev-SNAPSHOT\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\7c0677be8011741026309ef690a9f4db\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\12c076570219bdc2a11e9d0df335391a\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat-resources:1.2.0] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\ee9b51f71825564f346013ea1d4d0318\jetified-appcompat-resources-1.2.0\AndroidManifest.xml:17:1-24:12
@@ -121,8 +121,8 @@ MERGED from [org.firstinspires.ftc:OnBotJava:6.0.1] C:\Users\apate\.gradle\cache
 MERGED from [org.firstinspires.ftc:OnBotJava:6.0.1] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\5fd033806c529e56035eed6c54fff3ca\jetified-OnBotJava-6.0.1\AndroidManifest.xml:39:5-41:41
 MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\bf96d2b5a86ecd602a621e7e96856420\appcompat-1.2.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\bf96d2b5a86ecd602a621e7e96856420\appcompat-1.2.0\AndroidManifest.xml:20:5-22:41
-MERGED from [com.github.FTCLib.FTCLib:ftclib:dev-SNAPSHOT] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\b104bdd68ed36e2cf33b2390ff78abd1\jetified-ftclib-dev-SNAPSHOT\AndroidManifest.xml:7:5-9:41
-MERGED from [com.github.FTCLib.FTCLib:ftclib:dev-SNAPSHOT] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\b104bdd68ed36e2cf33b2390ff78abd1\jetified-ftclib-dev-SNAPSHOT\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.FTCLib.FTCLib:ftclib:dev-SNAPSHOT] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\b068c2745880e0068c289255bb2bebe4\jetified-ftclib-dev-SNAPSHOT\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.FTCLib.FTCLib:ftclib:dev-SNAPSHOT] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\b068c2745880e0068c289255bb2bebe4\jetified-ftclib-dev-SNAPSHOT\AndroidManifest.xml:7:5-9:41
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\7c0677be8011741026309ef690a9f4db\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\7c0677be8011741026309ef690a9f4db\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\12c076570219bdc2a11e9d0df335391a\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
