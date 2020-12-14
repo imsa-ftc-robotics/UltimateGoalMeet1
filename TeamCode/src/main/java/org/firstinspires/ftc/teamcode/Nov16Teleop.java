@@ -12,9 +12,9 @@ public class Nov16Teleop extends Robot{
 
 
         waitForStart();
-        //shooter.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        //shooter.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        shooter.setDirection(DcMotorEx.Direction.REVERSE);
+        shooter.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        shooter.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        //shooter.setDirection(DcMotorEx.Direction.REVERSE);
 
         wobbleGoalMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         wobbleGoalMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -71,16 +71,23 @@ public class Nov16Teleop extends Robot{
             wobbleGoalMotor.setPower(wobbleGoalMotorPower);
 
             if(gamepad1.a){
-                shooter.setPower(0.6);
+                shooter.setVelocity(1750);
             }
             else if (gamepad1.b){
-                shooter.setPower(0.68);
+                shooter.setVelocity(1400);
             }
             else if (gamepad1.x){
                 shooter.setPower(0);
             }
             else if (gamepad2.y){
                 shooter.setPower(0);
+            }
+
+            if (gamepad2.dpad_up){
+                transferServo.setPosition(0.4);
+            }
+            else if (gamepad2.dpad_down){
+                transferServo.setPosition(0.04);
             }
 
             //intake winch
@@ -94,7 +101,8 @@ public class Nov16Teleop extends Robot{
 
             transfer.setPower(gamepad2.left_stick_y);
 
-            telemetry.addData("shooter velocity", shooter.getPower());
+            //telemetry.addData("shooter velocity", shooter.getPower());
+            telemetry.addData("shooter encoder velo", shooter.getVelocity());
             telemetry.update();
 
         }

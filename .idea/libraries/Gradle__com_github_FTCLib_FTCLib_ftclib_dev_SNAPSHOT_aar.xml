@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.FTCLib.FTCLib:ftclib:dev-SNAPSHOT@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/62b8b261482616251c60909ad49f1cd4/jetified-ftclib-dev-SNAPSHOT/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/62b8b261482616251c60909ad49f1cd4/jetified-ftclib-dev-SNAPSHOT/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0a1515b7610cf77c91c97a1f11b06783/jetified-ftclib-dev-SNAPSHOT/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0a1515b7610cf77c91c97a1f11b06783/jetified-ftclib-dev-SNAPSHOT/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.FTCLib.FTCLib/ftclib/dev-SNAPSHOT/632c052f82f6157741c598929167a2861c6a786b/ftclib-dev-SNAPSHOT-javadoc.jar!/" />

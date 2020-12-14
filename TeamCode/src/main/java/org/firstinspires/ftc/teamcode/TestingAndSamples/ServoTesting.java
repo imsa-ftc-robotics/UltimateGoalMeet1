@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Robot;
 
 @TeleOp
-@Disabled
+//@Disabled
 public class ServoTesting extends Robot {
 
     @Override
@@ -21,6 +21,11 @@ public class ServoTesting extends Robot {
             down: 0.0
             normal: 0.41
             up: 0.64
+             */
+
+            /*
+            0.04
+            0.4
              */
 
             /* WOBBLE
