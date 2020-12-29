@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/FtcRobotController/FtcRobotController.iml" filepath="$PROJECT_DIR$/.idea/modules/FtcRobotController/FtcRobotController.iml" group="UltimateGoalMeet1/FtcRobotController" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/TeamCode/TeamCode.iml" filepath="$PROJECT_DIR$/.idea/modules/TeamCode/TeamCode.iml" group="UltimateGoalMeet1/TeamCode" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UltimateGoalMeet1.iml" filepath="$PROJECT_DIR$/.idea/modules/UltimateGoalMeet1.iml" group="UltimateGoalMeet1" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/UltimateGoalMeet1.iml" filepath="$PROJECT_DIR$/.idea/UltimateGoalMeet1.iml" group="UltimateGoalMeet1" />
     </modules>
   </component>
 </project>

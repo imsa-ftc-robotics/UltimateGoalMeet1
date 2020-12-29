@@ -35,7 +35,7 @@ public abstract class Robot extends LinearOpMode {
     public CRServo intakeWinch;
     public Servo wobbleGoalServo;
     //declaring constants for wobble goal positions
-    public static final double WOBBLE_CLOSED = 0.75;
+    public static final double WOBBLE_CLOSED = 0.8;
     public static final double WOBBLE_OPEN = 0.1;
     public static final double WOBBLE_HALF = 0.5;
 
@@ -399,6 +399,59 @@ public abstract class Robot extends LinearOpMode {
 
         stopDrivetrain();
     }
+    public void wrapIMU(double targetAngle, double left, double right, double threshold, double kp, double ki, double kd) {
+        //get the current value in radians
+        double currentValue = getFirstAngleWrapped();
+        //convert the target to radians
+        targetAngle = Math.toRadians(targetAngle);
+        //initialize PID variables
+        double error;
+        double derivative;
+        double integral = 0;
+        double lastError = 0;
+        double output;
+        //convert the threshold to radians
+        threshold = Math.toRadians(threshold);
+        useEncoders();
+        while (Math.abs(targetAngle - currentValue) > threshold && opModeIsActive()) {
+            //the error (aka proportional) is the difference between set point and current point
+            error = targetAngle- currentValue;
+            //integral is the summation of all the past error
+            integral += error;
+            //derivative is the difference between current and past error
+            //tries to predict future error
+            derivative = error - lastError;
+            //multiply each value by their respective constants and sum to get outuput
+            output = (error * kp) + (integral * ki) + (derivative * kd);
+
+            //set motor power based output value
+            leftFrontDrive.setPower(output * left);
+            leftBackDrive.setPower(output * left);
+            rightFrontDrive.setPower(output * right);
+            rightBackDrive.setPower(output * right);
+
+            //get the current value from the IMU
+            currentValue = getFirstAngleWrapped()
+            ;
+            telemetry.addData("Current Value", currentValue);
+            telemetry.addData("Target", targetAngle);
+            telemetry.addData("Left Power", leftBackDrive.getPower());
+            telemetry.addData("Right Power", rightBackDrive.getPower());
+            telemetry.update();
+            //make the last error equal to the current error
+            lastError = error;
+        }
+        stopDrivetrain();
+    }
+    public double getFirstAngleWrapped(){
+        if (getFirstAngle() < 0) {
+            return getFirstAngle() + (Math.PI*2);
+        }
+        else{
+            return getFirstAngle();
+        }
+    }
+
 
 
 

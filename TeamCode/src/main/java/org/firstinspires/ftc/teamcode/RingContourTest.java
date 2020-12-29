@@ -26,16 +26,17 @@ public class RingContourTest extends LinearOpMode {
     private UGContourRingPipeline pipeline;
     private OpenCvCamera camera;
 
-    private final int cameraMonitorViewId = this
-            .hardwareMap
-            .appContext
-            .getResources().getIdentifier(
-                    "cameraMonitorViewId",
-                    "id",
-                    hardwareMap.appContext.getPackageName()
-            );
+    private int cameraMonitorViewId;
     @Override
     public void runOpMode() throws InterruptedException {
+         cameraMonitorViewId = this
+                .hardwareMap
+                .appContext
+                .getResources().getIdentifier(
+                        "cameraMonitorViewId",
+                        "id",
+                        hardwareMap.appContext.getPackageName()
+                );
         if (USING_WEBCAM) {
             camera = OpenCvCameraFactory
                     .getInstance()

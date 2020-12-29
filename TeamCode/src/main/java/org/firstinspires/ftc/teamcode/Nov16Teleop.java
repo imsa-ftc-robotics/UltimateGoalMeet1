@@ -16,10 +16,8 @@ public class Nov16Teleop extends Robot{
         shooter.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         //shooter.setDirection(DcMotorEx.Direction.REVERSE);
 
-        wobbleGoalMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        wobbleGoalMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         double shift;
-        double reverse;
+        double reverse = 1;
         while (opModeIsActive()){
             double drive = -gamepad1.left_stick_y;
             double turn = gamepad1.right_stick_x;
@@ -33,10 +31,10 @@ public class Nov16Teleop extends Robot{
             }
 
             if (gamepad1.left_bumper){
-                reverse = -1;
+                shift = 0.2;
             }
             else {
-                reverse = 1;
+                shift =1;
             }
 
 
@@ -71,7 +69,7 @@ public class Nov16Teleop extends Robot{
             wobbleGoalMotor.setPower(wobbleGoalMotorPower);
 
             if(gamepad1.a){
-                shooter.setVelocity(1750);
+                shooter.setVelocity(1730);
             }
             else if (gamepad1.b){
                 shooter.setVelocity(1400);
