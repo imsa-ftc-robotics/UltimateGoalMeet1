@@ -69,7 +69,7 @@ public class Nov16Teleop extends Robot{
             wobbleGoalMotor.setPower(wobbleGoalMotorPower);
 
             if(gamepad1.a){
-                shooter.setVelocity(1730);
+                shooter.setVelocity(2200);
             }
             else if (gamepad1.b){
                 shooter.setVelocity(1400);
