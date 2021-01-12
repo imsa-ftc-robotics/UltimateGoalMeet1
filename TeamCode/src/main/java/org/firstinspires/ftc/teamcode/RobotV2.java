@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
@@ -117,6 +118,9 @@ public abstract class RobotV2 extends LinearOpMode {
             // and named "imu".
             imu = hardwareMap.get(BNO055IMU.class, "imu");
             imu.initialize(parameters);
+
+            PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(75, 0, 10, 15);
+            shooter.setPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER, MOTOR_VELO_PID);
 
  /*           int target_tollerance = 10;
             double p = 7.2;

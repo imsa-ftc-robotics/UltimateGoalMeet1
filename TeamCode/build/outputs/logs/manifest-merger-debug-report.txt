@@ -12,7 +12,7 @@ MERGED from [org.firstinspires.ftc:FtcCommon:6.1.1] C:\Users\apate\.gradle\cache
 MERGED from [:tfod-release:] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\5fab9b383ed9a29bd9ec24ccffc48ca0\jetified-tfod-release\AndroidManifest.xml:2:1-11:12
 MERGED from [:tensorflow-lite-0.0.0-nightly:] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\8de39f8baae639b9b1caa67458fd4c35\jetified-tensorflow-lite-0.0.0-nightly\AndroidManifest.xml:2:1-6:12
 MERGED from [com.arcrobotics.ftclib:vision:1.1.0] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\b06b219bb3aa4b2ce366104b68293a96\jetified-vision-1.1.0\AndroidManifest.xml:2:1-12:12
-MERGED from [org.openftc:easyopencv:1.4.2] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\6fbb8c39d9f94feb2819b74694f03eec\jetified-easyopencv-1.4.2\AndroidManifest.xml:2:1-11:12
+MERGED from [org.openftc:easyopencv:1.4.2] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\f0baf813a95559a860e0e0ac40bfb3ee\jetified-easyopencv-1.4.2\AndroidManifest.xml:2:1-11:12
 MERGED from [com.arcrobotics:ftclib:1.1.6] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\c66dd1e2946ae94b04df2fd058e869f5\jetified-ftclib-1.1.6\AndroidManifest.xml:2:1-11:12
 MERGED from [org.firstinspires.ftc:Inspection:6.1.1] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\475cdf6e60918154a87a9336488dabc3\jetified-Inspection-6.1.1\AndroidManifest.xml:2:1-32:12
 MERGED from [org.firstinspires.ftc:Blocks:6.1.1] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\b765f1f17f7b83be2b0cc4c0ffbfa067\jetified-Blocks-6.1.1\AndroidManifest.xml:2:1-26:12
@@ -111,8 +111,8 @@ MERGED from [:tfod-release:] C:\Users\apate\.gradle\caches\transforms-2\files-2.
 MERGED from [:tfod-release:] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\5fab9b383ed9a29bd9ec24ccffc48ca0\jetified-tfod-release\AndroidManifest.xml:7:5-9:41
 MERGED from [com.arcrobotics.ftclib:vision:1.1.0] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\b06b219bb3aa4b2ce366104b68293a96\jetified-vision-1.1.0\AndroidManifest.xml:7:5-9:41
 MERGED from [com.arcrobotics.ftclib:vision:1.1.0] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\b06b219bb3aa4b2ce366104b68293a96\jetified-vision-1.1.0\AndroidManifest.xml:7:5-9:41
-MERGED from [org.openftc:easyopencv:1.4.2] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\6fbb8c39d9f94feb2819b74694f03eec\jetified-easyopencv-1.4.2\AndroidManifest.xml:7:5-9:41
-MERGED from [org.openftc:easyopencv:1.4.2] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\6fbb8c39d9f94feb2819b74694f03eec\jetified-easyopencv-1.4.2\AndroidManifest.xml:7:5-9:41
+MERGED from [org.openftc:easyopencv:1.4.2] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\f0baf813a95559a860e0e0ac40bfb3ee\jetified-easyopencv-1.4.2\AndroidManifest.xml:7:5-9:41
+MERGED from [org.openftc:easyopencv:1.4.2] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\f0baf813a95559a860e0e0ac40bfb3ee\jetified-easyopencv-1.4.2\AndroidManifest.xml:7:5-9:41
 MERGED from [com.arcrobotics:ftclib:1.1.6] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\c66dd1e2946ae94b04df2fd058e869f5\jetified-ftclib-1.1.6\AndroidManifest.xml:7:5-9:41
 MERGED from [com.arcrobotics:ftclib:1.1.6] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\c66dd1e2946ae94b04df2fd058e869f5\jetified-ftclib-1.1.6\AndroidManifest.xml:7:5-9:41
 MERGED from [org.firstinspires.ftc:Inspection:6.1.1] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\475cdf6e60918154a87a9336488dabc3\jetified-Inspection-6.1.1\AndroidManifest.xml:7:5-9:41

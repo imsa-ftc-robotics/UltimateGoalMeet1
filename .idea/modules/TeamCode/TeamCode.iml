@@ -100,6 +100,7 @@
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.4.10@jar" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: org.nanohttpd:nanohttpd-websocket:2.3.1@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.noahbres.jotai:jotai:1.0.2@jar" level="project" />
     <orderEntry type="library" name="Gradle: org.ejml:ejml-simple:0.39@jar" level="project" />
     <orderEntry type="library" name="Gradle: org.ejml:ejml-fsparse:0.39@jar" level="project" />
     <orderEntry type="library" name="Gradle: org.ejml:ejml-fdense:0.39@jar" level="project" />
