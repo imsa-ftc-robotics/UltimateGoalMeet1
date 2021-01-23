@@ -4,6 +4,16 @@
             "outputFile": "C:\\TITANS_17576\\2020-2021\\Software\\UltimateGoal\\UltimateGoalMeet1\\TeamCode\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
+                    "source": "C:\\Users\\apate\\.gradle\\caches\\transforms-2\\files-2.1\\19714c6e347364685664ae698a7faea3\\core-1.5.0-beta01\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
                     "source": "C:\\Users\\apate\\.gradle\\caches\\transforms-2\\files-2.1\\bf96d2b5a86ecd602a621e7e96856420\\appcompat-1.2.0\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
@@ -20,16 +30,6 @@
                         "endLines": "6",
                         "endColumns": "12",
                         "endOffsets": "289"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\apate\\.gradle\\caches\\transforms-2\\files-2.1\\78bfb47c9de3659ec273d73c4d4597a2\\core-1.5.0-alpha05\\res\\values-v16\\values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
                     }
                 }
             ]

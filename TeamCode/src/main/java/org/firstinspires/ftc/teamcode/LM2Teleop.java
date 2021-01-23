@@ -5,8 +5,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.teamcode.Archive.Robot;
+
 @TeleOp
-public class LM2Teleop extends Robot{
+public class LM2Teleop extends Robot {
 
     public void op_mode(){
 

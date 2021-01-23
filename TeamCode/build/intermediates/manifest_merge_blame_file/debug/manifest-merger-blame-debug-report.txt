@@ -148,7 +148,7 @@
 88        android:allowBackup="true"
 88-->[:FtcRobotController] C:\TITANS_17576\2020-2021\Software\UltimateGoal\UltimateGoalMeet1\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:9-35
 89        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-89-->[androidx.core:core:1.5.0-alpha05] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\78bfb47c9de3659ec273d73c4d4597a2\core-1.5.0-alpha05\AndroidManifest.xml:24:18-86
+89-->[androidx.core:core:1.5.0-beta01] C:\Users\apate\.gradle\caches\transforms-2\files-2.1\19714c6e347364685664ae698a7faea3\core-1.5.0-beta01\AndroidManifest.xml:24:18-86
 90        android:debuggable="true"
 91        android:extractNativeLibs="true"
 91-->[:FtcRobotController] C:\TITANS_17576\2020-2021\Software\UltimateGoal\UltimateGoalMeet1\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:9-41

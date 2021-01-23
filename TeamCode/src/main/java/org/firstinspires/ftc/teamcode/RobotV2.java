@@ -119,7 +119,7 @@ public abstract class RobotV2 extends LinearOpMode {
             imu = hardwareMap.get(BNO055IMU.class, "imu");
             imu.initialize(parameters);
 
-            PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(75, 0, 10, 15);
+            PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(75, 0, 20, 15);
             shooter.setPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER, MOTOR_VELO_PID);
 
  /*           int target_tollerance = 10;
@@ -454,8 +454,8 @@ public abstract class RobotV2 extends LinearOpMode {
             rightBackDrive.setPower(output * right);
 
             //get the current value from the IMU
-            currentValue = getFirstAngleWrapped()
-            ;
+            currentValue = getFirstAngleWrapped();
+
             telemetry.addData("Current Value", currentValue);
             telemetry.addData("Target", targetAngle);
             telemetry.addData("Left Power", leftBackDrive.getPower());

@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode;
 
 //haha yes I totally found an excuse to use this name again :P -Christian
 
+import org.firstinspires.ftc.teamcode.Archive.Robot;
+
 /**
  * An abstract op mode structured around Future7573. Methods named weirdly cause
  * they conflicted with stuff from LinearOpMode
