@@ -22,12 +22,13 @@ public class RudimentaryMeet3 extends RobotV2  {
         FtcDashboard dashboard = FtcDashboard.getInstance();
 
         UGContourRingPipeline.Height height = UGContourRingPipeline.Height.ONE;
-        while (!isStarted()){
+        while (!isStarted() && !isStopRequested()){
             height = pipeline.getHeight();
             telemetry.addData("[Ring Stack] >>", height);
             telemetry.update();
             idle();
         }
+
         waitForStart();
 
 
@@ -50,7 +51,7 @@ public class RudimentaryMeet3 extends RobotV2  {
             case FOUR:
                 strafe(0.5, 400);
                 moveToPosition(0.7, (int)(TICKS_PER_INCH*12*10.1));
-                reorientIMU(0, -0.5, 0.5, 0.5, 1.5, 0.001, 0);
+                reorientIMU(0, -0.5, 0.5, 0.5, 1.5, 0.003, 0);
                 sleep(300);
 
                 strafeAngle(0.5,   180, 1450);
@@ -60,7 +61,7 @@ public class RudimentaryMeet3 extends RobotV2  {
                 wobbleGoalServo.setPosition(WOBBLE_OPEN);
                 sleep(500);
                 //goes back for second wobble goal
-                moveToPosition(0.7, (int)(-TICKS_PER_INCH*12*5.4));
+                moveToPosition(0.7, (int)(-TICKS_PER_INCH*12*5.42));
                 //wobbleGoalMotor.setPower(0.4);
                 //sleep(400);
                 //wobbleGoalMotor.setPower(0);
@@ -72,7 +73,8 @@ public class RudimentaryMeet3 extends RobotV2  {
                 wobbleGoalMotor.setPower(0);
                 wobbleGoalServo.setPosition(WOBBLE_HALF);
                 reorientIMU(0.75, -0.5,0.5,0.5, 1.5, 0.001, 0);
-                strafe(-0.4, 1550);
+                strafe(-0.4, 1650);
+                reorientIMU(0, -0.7, 0.7, 0.5, 1.5, 0.005, 0);
                 sleep(500);
 
                 wobbleGoalServo.setPosition(WOBBLE_CLOSED);
@@ -82,9 +84,9 @@ public class RudimentaryMeet3 extends RobotV2  {
                 sleep(450);
                 wobbleGoalMotor.setPower(0);
                 //moving the robot to C
-                strafe(-0.5, 500);
-                reorientIMU(0, -0.5,0.5,0.5, 1.5, 0.001, 0);
-                moveToPosition(0.7, (int)(TICKS_PER_INCH*12*9.4));
+                strafe(-0.5, 600);
+                reorientIMU(-1, -0.5,0.5,0.5, 1.5, 0.005, 0);
+                moveToPosition(0.7, (int)(TICKS_PER_INCH*12*9));
 
                 wobbleGoalServo.setPosition(WOBBLE_OPEN);
                 sleep(500);
@@ -107,13 +109,13 @@ public class RudimentaryMeet3 extends RobotV2  {
                 wobbleGoalServo.setPosition(WOBBLE_OPEN);
                 sleep(300);
                 wobbleGoalMotor.setPower(0.4);
-                sleep(400);
+                sleep(350);
                 wobbleGoalMotor.setPower(0);
                 strafingPID(0.5, 500,1,0,0);
-                moveToPosition(0.7, (int)(-TICKS_PER_INCH*12*6.89));
+                moveToPosition(0.7, (int)(-TICKS_PER_INCH*12*6.95));
                 wobbleGoalServo.setPosition(WOBBLE_HALF);
                 reorientIMU(0, -0.5, 0.5, 0.5, 1.5, 0.005, 0);
-                strafe(-0.4, 1400);
+                strafingPID(-0.4, 1500, 1,0,0);
                 sleep(100);
                 wobbleGoalServo.setPosition(WOBBLE_CLOSED);
                 sleep(500);
@@ -142,11 +144,11 @@ public class RudimentaryMeet3 extends RobotV2  {
                 shooter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 shooter.setVelocity(1470);
-                wrapIMU(180, -0.5, 0.5, 0.7, 1, 0, 0);
-                strafe(0.5, 1000);
-                transferServo.setPosition(0.4);
+                wrapIMU(180, -0.5, 0.5, 0.5, 1, 0.001, 0);
+                strafingPID(0.5, 1100,1,0,0);
+                transferServo.setPosition(0);
                 transfer.setPower(-0.7);
-                wrapIMU(180, -0.5, 0.5, 0.7, 1, 0, 0);
+                wrapIMU(180, -0.5, 0.5, 0.5, 1, 0.005, 0);
                 sleep(2200);
                 transfer.setPower(0);
                 shooter.setPower(0);
@@ -206,7 +208,7 @@ public class RudimentaryMeet3 extends RobotV2  {
                 shooter.setVelocity(1470
                 );
                 wrapIMU(180, -0.5, 0.5, 0.7, 1.2, 0, 0);
-                transferServo.setPosition(0.4);
+                transferServo.setPosition(0);
                 transfer.setPower(-0.7);
                 sleep(3000);
                 strafeAngle(-0.5,0, 500);
