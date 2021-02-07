@@ -49,13 +49,15 @@ public class AutoLM4 extends LinearOpMode {
 
         Pose2d startPose = new Pose2d(-64.0, 24.0, 0.0);
 
+        drive.setPoseEstimate(startPose);
+
 
         waitForStart();
 
         if (isStopRequested()) return;
 
         TrajectoryBuilder near1 = drive.trajectoryBuilder(startPose)
-                .splineTo(new Vector2d(15.0, 50.0), 0.0);
+                .splineTo(new Vector2d(15.0, 45.0), 0.0);
 
         drive.followTrajectory(near1.build());
     }
