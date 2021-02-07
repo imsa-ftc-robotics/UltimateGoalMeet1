@@ -3,7 +3,9 @@ package org.firstinspires.ftc.teamcode.drive.Autonomous;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
+import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder;
 import com.arcrobotics.ftclib.vision.UGContourRingPipeline;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -13,6 +15,7 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 
+@Autonomous
 public class AutoLM4 extends LinearOpMode {
 
     @Override
@@ -44,23 +47,17 @@ public class AutoLM4 extends LinearOpMode {
 
         drive.camera.openCameraDeviceAsync(() -> drive.camera.startStreaming(drive.CAMERA_WIDTH, drive.CAMERA_HEIGHT, OpenCvCameraRotation.UPRIGHT));
 
+        Pose2d startPose = new Pose2d(-64.0, 24.0, 0.0);
+
+
         waitForStart();
 
         if (isStopRequested()) return;
 
-        Trajectory near1 = drive.trajectoryBuilder(new Pose2d())
-                .splineTo(new Vector2d(30, 30), 0)
-                .build();
+        TrajectoryBuilder near1 = drive.trajectoryBuilder(startPose)
+                .splineTo(new Vector2d(15.0, 50.0), 0.0);
 
-        drive.followTrajectory(near1);
-
-        sleep(2000);
-
-        drive.followTrajectory(
-                drive.trajectoryBuilder(near1.end(), true)
-                        .splineTo(new Vector2d(0, 0), Math.toRadians(180))
-                        .build()
-        );
+        drive.followTrajectory(near1.build());
     }
 
 }
