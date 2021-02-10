@@ -10,12 +10,14 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.Archive.Robot;
 import org.firstinspires.ftc.teamcode.drive.RobotV3;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 @Autonomous
@@ -107,6 +109,78 @@ public class AutoLM4 extends LinearOpMode {
         return near;
     }
 
+    private ArrayList<TrajectoryBuilder> midTrajectory(Pose2d startPose, RobotV3 drive){
+        ArrayList<TrajectoryBuilder> mid = new ArrayList<TrajectoryBuilder>();
+
+        TrajectoryBuilder middle1 = drive.trajectoryBuilder(startPose)
+                .splineTo(new Vector2d(-24.0, 18.0), 0.0)
+                .splineTo(new Vector2d(40.0, 30.0),0.0);
+
+        TrajectoryBuilder middle2 = drive.trajectoryBuilder(middle1.build().end(), true)
+                .splineTo(new Vector2d(0.0, 40.0), 0.0);
+
+        TrajectoryBuilder middle3 = drive.trajectoryBuilder(middle2.build().end())
+                .splineTo(new Vector2d(-10.0, 50.0), Math.toRadians(180))
+                .splineTo(new Vector2d(-30.0, 50.0), Math.toRadians(180));
+
+        //TURN AFTERWARDS
+
+        TrajectoryBuilder middle4 = drive.trajectoryBuilder(middle3.build().end().plus(new Pose2d(0,0, Math.toRadians(270))))
+                .strafeLeft(5);
+
+        TrajectoryBuilder middle5 = drive.trajectoryBuilder(middle4.build().end())
+                .splineTo(new Vector2d(32.0, 30.0), 0.0);
+
+        TrajectoryBuilder middle6 = drive.trajectoryBuilder(middle5.build().end())
+                .back(24);
+
+        mid.add(middle1);
+        mid.add(middle2);
+        mid.add(middle3);
+        mid.add(middle4);
+        mid.add(middle5);
+        mid.add(middle6);
+
+        return mid;
+    }
+
+    private ArrayList<TrajectoryBuilder> farTrajectory(Pose2d startPose, RobotV3 drive){
+        ArrayList<TrajectoryBuilder> far = new ArrayList<TrajectoryBuilder>();
+
+        TrajectoryBuilder far1 = drive.trajectoryBuilder(startPose)
+                .splineTo(new Vector2d(-32.0, 18.0), 0.0)
+                .splineTo(new Vector2d(62.0, 50.0), 0.0);
+//drop wobble
+        TrajectoryBuilder far2 = drive.trajectoryBuilder(far1.build().end(), true)
+                .splineTo(new Vector2d(0.0, 40.0), 0.0);
+//shoot
+
+        TrajectoryBuilder far3 = drive.trajectoryBuilder(far2.build().end(), true)
+                .splineTo(new Vector2d(-30.0, 50.0), Math.toRadians(180));
+
+        //TURN -90 HERE
+
+        TrajectoryBuilder far4 = drive.trajectoryBuilder(far3.build().end().plus(new Pose2d(0,0,Math.toRadians(270))))
+                .strafeLeft(5.0);
+
+        TrajectoryBuilder far5 = drive.trajectoryBuilder(far4.build().end())
+                .splineTo(new Vector2d(-20.0, 50.0), 0.0)
+                .splineTo(new Vector2d(55.0, 50.0), 0.0);
+
+        TrajectoryBuilder far6 = drive.trajectoryBuilder(far5.build().end())
+                .back(48);
+
+        far.add(far1);
+        far.add(far2);
+        far.add(far3);
+        far.add(far4);
+        far.add(far5);
+        far.add(far6);
+
+        return far;
+
+    }
+
     private void followNear(Pose2d startPose, RobotV3 drive){
         ArrayList<TrajectoryBuilder> traj = nearTrajectory(startPose, drive);
 
@@ -130,19 +204,59 @@ public class AutoLM4 extends LinearOpMode {
         sleep(20000);
     }
 
-    private void midTrajectory(Pose2d startPose, RobotV3 drive){
-        ArrayList<TrajectoryBuilder> mid = new ArrayList<TrajectoryBuilder>();
+    private void followMid(Pose2d startPose, RobotV3 drive){
+        ArrayList<TrajectoryBuilder> traj = midTrajectory(startPose, drive);
 
-        TrajectoryBuilder middle1 = drive.trajectoryBuilder(startPose)
-                .splineTo(new Vector2d(-24.0, 18.0), 0.0)
-                .splineTo(new Vector2d(40.0, 30.0),0.0);
+        drive.followTrajectory(traj.get(0).build());
+        sleep(500);
+        //put down wobble goal
+        //drive.shooter.setVelocity(2100);
+        drive.followTrajectory(traj.get(1).build());
+        sleep(500);
+        //run transfer and shoot
+        drive.followTrajectory(traj.get(2).build());
+        sleep(500);
+        drive.turn(-90);
+        //bring wobble down
+        sleep(500);
+        drive.followTrajectory(traj.get(3).build());
+        sleep(500);
+        //grab
+        drive.followTrajectory(traj.get(4).build());
+        //drop wobble
+        sleep(500);
+        drive.followTrajectory(traj.get(5).build());
+    }
 
-        TrajectoryBuilder middle2 = drive.trajectoryBuilder(middle1.build().end(), true)
-                .splineTo(new Vector2d(0.0, 40.0), 0.0);
+    private void followFar(Pose2d startPose, RobotV3 drive){
+        ArrayList<TrajectoryBuilder> traj = farTrajectory(startPose, drive);
 
-        TrajectoryBuilder middle3 = drive.trajectoryBuilder(middle2.build().end());
+        drive.followTrajectory(traj.get(0).build());
+        sleep(500);
+        //drop wobble
+        //drive.shooter.setVelocity(2100);
 
+        drive.followTrajectory(traj.get(1).build());
+        sleep(500);
+
+        drive.followTrajectory(traj.get(2).build());
+        sleep(500);
+        drive.turn(-90);
+        sleep(500);
+        //bring down arm
+
+
+        drive.followTrajectory(traj.get(3).build());
+        //grab wobble
+
+        sleep(500);
+        drive.followTrajectory(traj.get(4).build());
+        //drop wobble
+
+        drive.followTrajectory(traj.get(5).build());
 
     }
+
+
 
 }

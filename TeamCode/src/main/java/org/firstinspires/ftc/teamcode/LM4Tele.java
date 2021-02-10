@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp
-@Disabled
+//@Disabled
 public class LM4Tele extends RobotV4{
 
     public void op_mode(){
