@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
@@ -38,9 +39,8 @@ public abstract class RobotV4 extends LinearOpMode {
     public CRServo intakeWinch;
     public Servo wobbleGoalServo;
     //declaring constants for wobble goal positions
-    public static final double WOBBLE_CLOSED = 0.8;
+    public static final double WOBBLE_CLOSED = 0.65;
     public static final double WOBBLE_OPEN = 0.1;
-    public static final double WOBBLE_HALF = 0.5;
 
     public Servo transferServo;
     //declaring imu
@@ -89,8 +89,9 @@ public abstract class RobotV4 extends LinearOpMode {
             rightFrontDrive.setDirection(DcMotorEx.Direction.FORWARD);
             rightFrontDrive.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-            wobbleGoalMotor1 =(CRServo) hardwareMap.get("wobbleGoal1");
-            wobbleGoalMotor2 = (CRServo)hardwareMap.get("wobbleGoal2");
+            wobbleGoalMotor1 =(CRServo) hardwareMap.get("wobbleArm1");
+            wobbleGoalMotor2 = (CRServo)hardwareMap.get("wobbleArm2");
+            wobbleGoalMotor2.setDirection(DcMotorSimple.Direction.REVERSE);
 
             intake = (DcMotorEx)hardwareMap.get("intake");
             intake.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);

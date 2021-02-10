@@ -57,13 +57,12 @@ public class LM4Tele extends RobotV4{
 
             if (gamepad2.a)
                 wobbleGoalServo.setPosition(WOBBLE_CLOSED);
-            if(gamepad2.b)
-                wobbleGoalServo.setPosition(WOBBLE_HALF);
             if (gamepad2.x)
                 wobbleGoalServo.setPosition(WOBBLE_OPEN);
 
-            double wobbleGoalMotorPower = -gamepad2.right_stick_y*0.5;
-            wobbleGoalMotor.setPower(wobbleGoalMotorPower);
+            double wobbleGoalMotorPower = -gamepad2.right_stick_y;
+            wobbleGoalMotor1.setPower(wobbleGoalMotorPower);
+            wobbleGoalMotor2.setPower(wobbleGoalMotorPower);
 
             if(gamepad1.a){
                 shooter.setVelocity(2200);

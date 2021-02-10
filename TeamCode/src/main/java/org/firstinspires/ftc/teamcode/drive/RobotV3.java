@@ -98,12 +98,13 @@ public class RobotV3 extends MecanumDrive {
     private DcMotorEx leftFront, leftRear, rightRear, rightFront;
     //declaring the superstructure motors
     public DcMotorEx shooter;
-    public DcMotorEx wobbleGoalMotor;
     public DcMotorEx intake;
     public DcMotorEx transfer;
     //declaring servos
     public CRServo intakeWinch;
     public Servo wobbleGoalServo;
+    public CRServo wobbleGoalMotor1;
+    public CRServo wobbleGoalMotor2;
     //declaring constants for wobble goal positions
     public static final double WOBBLE_CLOSED = 0.8;
     public static final double WOBBLE_OPEN = 0.1;
@@ -184,8 +185,9 @@ public class RobotV3 extends MecanumDrive {
         rightRear = hardwareMap.get(DcMotorEx.class, "backRight");
         rightFront = hardwareMap.get(DcMotorEx.class, "frontRight");
 
-        wobbleGoalMotor =(DcMotorEx)hardwareMap.get("wobbleGoal");
-        wobbleGoalMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        wobbleGoalMotor1 =(CRServo) hardwareMap.get("wobbleArm1");
+        wobbleGoalMotor2 = (CRServo)hardwareMap.get("wobbleArm2");
+        wobbleGoalMotor2.setDirection(DcMotorSimple.Direction.REVERSE);
 
         intake = (DcMotorEx)hardwareMap.get("intake");
         intake.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
