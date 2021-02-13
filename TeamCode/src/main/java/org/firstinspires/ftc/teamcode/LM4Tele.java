@@ -25,10 +25,10 @@ public class LM4Tele extends RobotV4{
             double strafe = gamepad1.left_stick_x;
 
             if (gamepad1.right_bumper){
-                shift = 0.5;
+                shift = 0.4;
             }
             else if (gamepad1.left_bumper){
-                shift = 0.3;
+                shift = 0.2;
             }
             else {
                 shift =1;
@@ -68,7 +68,7 @@ public class LM4Tele extends RobotV4{
                 shooter.setVelocity(2200);
             }
             else if (gamepad1.b){
-                shooter.setVelocity(1600);
+                shooter.setVelocity(1650);
             }
             else if (gamepad1.x){
                 shooter.setPower(0);

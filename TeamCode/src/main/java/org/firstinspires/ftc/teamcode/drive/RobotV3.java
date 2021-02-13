@@ -89,8 +89,8 @@ public class RobotV3 extends MecanumDrive {
     private MotionProfile turnProfile;
     private double turnStart;
 
-    private TrajectoryVelocityConstraint velConstraint;
-    private TrajectoryAccelerationConstraint accelConstraint;
+    public TrajectoryVelocityConstraint velConstraint;
+    public TrajectoryAccelerationConstraint accelConstraint;
     private TrajectoryFollower follower;
 
     private LinkedList<Pose2d> poseHistory;
@@ -105,10 +105,10 @@ public class RobotV3 extends MecanumDrive {
     public Servo wobbleGoalServo;
     public CRServo wobbleGoalMotor1;
     public CRServo wobbleGoalMotor2;
+
     //declaring constants for wobble goal positions
-    public static final double WOBBLE_CLOSED = 0.8;
+    public static final double WOBBLE_CLOSED = 0.65;
     public static final double WOBBLE_OPEN = 0.1;
-    public static final double WOBBLE_HALF = 0.5;
 
     public Servo transferServo;
 
