@@ -96,6 +96,7 @@ public class AutoLM4 extends LinearOpMode {
 
             case FOUR:
                 followFar(startPose, drive);
+                break;
         }
 
     }
@@ -116,7 +117,7 @@ public class AutoLM4 extends LinearOpMode {
                 .strafeRight(5);
 
         TrajectoryBuilder near2 = drive.trajectoryBuilder(nearStrafe.build().end(), true)
-                .splineTo(new Vector2d(0.0, 40.0), Math.toRadians(180.0))
+                .splineTo(new Vector2d(-2.0, 38.0), Math.toRadians(180.0))
                 .addTemporalMarker(0.2, () -> {
                     drive.wobbleGoalMotor2.setPower(0.9);
                     drive.wobbleGoalMotor1.setPower(0.9);
@@ -201,7 +202,7 @@ public class AutoLM4 extends LinearOpMode {
 
         TrajectoryBuilder middle6 = drive.trajectoryBuilder(middle5.build().end())
                 .strafeRight(10)
-                .splineToConstantHeading(new Vector2d(10, 3), 0.0);
+                .splineToConstantHeading(new Vector2d(7, 3), 0.0);
 
         mid.add(middle1);
         mid.add(middle2);
@@ -236,7 +237,7 @@ public class AutoLM4 extends LinearOpMode {
 //shoot
 
         TrajectoryBuilder far3 = drive.trajectoryBuilder(far2.build().end(), true)
-                .splineTo(new Vector2d(-30.0, 45.0), Math.toRadians(180));
+                .splineTo(new Vector2d(-30.0, 48.0), Math.toRadians(180));
 
         //TURN 90 HERE
 
@@ -246,7 +247,7 @@ public class AutoLM4 extends LinearOpMode {
         TrajectoryBuilder far5 = drive.trajectoryBuilder(far4.build().end())
                 .splineTo(new Vector2d(-20.0, 50.0), 0.0)
                 .splineTo(new Vector2d(58.0, 42.0), 0.0)
-                .addTemporalMarker(0.4, () -> {
+                .addTemporalMarker(0.5, () -> {
                     drive.wobbleGoalMotor2.setPower(0);
                     drive.wobbleGoalMotor1.setPower(0);
                 });
@@ -275,18 +276,19 @@ public class AutoLM4 extends LinearOpMode {
 
         //put down wobble goal
 
-        drive.wobbleGoalMotor2.setPower(-0.9);
-        drive.wobbleGoalMotor1.setPower(-0.9);
-        sleep(800);
+        drive.wobbleGoalMotor1.setPower(-1);
+        drive.wobbleGoalMotor2.setPower(-1);
+        sleep(1000);
         drive.wobbleGoalMotor2.setPower(0);
         drive.wobbleGoalMotor1.setPower(0);
         drive.wobbleGoalServo.setPosition(drive.WOBBLE_OPEN);
-        sleep(500);
+        telemetry.addData("done", "done");
+        telemetry.update();
 
         drive.followTrajectory(traj.get(6).build());
         sleep(100);
 
-        drive.shooter.setVelocity(2100);
+        drive.shooter.setVelocity(2200);
 
         drive.followTrajectory(traj.get(1).build());
         sleep(500);
@@ -295,7 +297,8 @@ public class AutoLM4 extends LinearOpMode {
         sleep(500);
 
         drive.transferServo.setPosition(0);
-        drive.transfer.setPower(-0.7);
+        sleep(300);
+        drive.transfer.setPower(-0.9);
         drive.intake.setPower(-0.5);
         sleep(3000);
         drive.transfer.setPower(0);
@@ -308,7 +311,7 @@ public class AutoLM4 extends LinearOpMode {
 
         drive.wobbleGoalMotor2.setPower(-0.9);
         drive.wobbleGoalMotor1.setPower(-0.9);
-        sleep(800);
+        sleep(900);
         drive.wobbleGoalMotor2.setPower(0);
         drive.wobbleGoalMotor1.setPower(0);
         drive.wobbleGoalServo.setPosition(drive.WOBBLE_OPEN);
@@ -319,9 +322,9 @@ public class AutoLM4 extends LinearOpMode {
         //grab wobble goal and bring arm up
         drive.wobbleGoalServo.setPosition(drive.WOBBLE_CLOSED);
         sleep(500);
-        drive.wobbleGoalMotor2.setPower(0.9);
-        drive.wobbleGoalMotor1.setPower(0.9);
-        sleep(800);
+        drive.wobbleGoalMotor2.setPower(1);
+        drive.wobbleGoalMotor1.setPower(1);
+        sleep(1100);
         drive.wobbleGoalMotor2.setPower(0);
         drive.wobbleGoalMotor1.setPower(0);
         sleep(500);
@@ -344,27 +347,26 @@ public class AutoLM4 extends LinearOpMode {
         ArrayList<TrajectoryBuilder> traj = midTrajectory(startPose, drive);
 
         drive.followTrajectory(traj.get(0).build());
-        sleep(500);
 
         //put down wobble goal
         drive.wobbleGoalMotor2.setPower(-0.9);
         drive.wobbleGoalMotor1.setPower(-0.9);
-        sleep(600);
+        sleep(800);
         drive.wobbleGoalMotor2.setPower(0);
         drive.wobbleGoalMotor1.setPower(0);
+        sleep(100);
         drive.wobbleGoalServo.setPosition(drive.WOBBLE_OPEN);
-        sleep(500);
+        sleep(300);
 
         drive.followTrajectory(traj.get(6).build());
-        sleep(100);
 
-        drive.shooter.setVelocity(2100);
+        drive.shooter.setVelocity(2200);
         drive.followTrajectory(traj.get(1).build());
         drive.transferServo.setPosition(0);
-        sleep(500);
+        sleep(300);
 
         //run transfer and shoot
-        drive.transfer.setPower(-0.7);
+        drive.transfer.setPower(-0.9);
         drive.intake.setPower(-0.5);
         sleep(3000);
         drive.transfer.setPower(0);
@@ -377,23 +379,20 @@ public class AutoLM4 extends LinearOpMode {
         drive.turn(Math.toRadians(-90));
         //bring wobble down
 
-        //put down wobble goal
         drive.wobbleGoalMotor2.setPower(-0.9);
         drive.wobbleGoalMotor1.setPower(-0.9);
-        sleep(700);
+        sleep(800);
         drive.wobbleGoalMotor2.setPower(0);
         drive.wobbleGoalMotor1.setPower(0);
         drive.wobbleGoalServo.setPosition(drive.WOBBLE_OPEN);
-        sleep(500);
 
         drive.followTrajectory(traj.get(3).build());
-        sleep(500);
         //grab
         drive.wobbleGoalServo.setPosition(drive.WOBBLE_CLOSED);
         sleep(700);
-        drive.wobbleGoalMotor2.setPower(0.9);
-        drive.wobbleGoalMotor1.setPower(0.9);
-        sleep(700);
+        drive.wobbleGoalMotor2.setPower(1);
+        drive.wobbleGoalMotor1.setPower(1);
+        sleep(1000);
         drive.wobbleGoalMotor2.setPower(0);
         drive.wobbleGoalMotor1.setPower(0);
 
@@ -403,7 +402,7 @@ public class AutoLM4 extends LinearOpMode {
         //drop wobble
         drive.wobbleGoalMotor2.setPower(-0.9);
         drive.wobbleGoalMotor1.setPower(-0.9);
-        sleep(600);
+        sleep(800);
         drive.wobbleGoalMotor2.setPower(0);
         drive.wobbleGoalMotor1.setPower(0);
         drive.wobbleGoalServo.setPosition(drive.WOBBLE_OPEN);
@@ -418,19 +417,20 @@ public class AutoLM4 extends LinearOpMode {
 
         drive.wobbleGoalMotor2.setPower(-0.9);
         drive.wobbleGoalMotor1.setPower(-0.9);
-        sleep(600);
+        sleep(800);
         drive.wobbleGoalMotor2.setPower(0);
         drive.wobbleGoalMotor1.setPower(0);
         drive.wobbleGoalServo.setPosition(drive.WOBBLE_OPEN);
-        sleep(250);
+        sleep(200);
 
         drive.followTrajectory(traj.get(6).build());
-        drive.shooter.setVelocity(2100);
+        drive.shooter.setVelocity(2200);
 
         drive.followTrajectory(traj.get(1).build());
 
         drive.transferServo.setPosition(0);
-        drive.transfer.setPower(-0.7);
+        sleep(300);
+        drive.transfer.setPower(-0.9);
         drive.intake.setPower(-0.5);
         sleep(3000);
         drive.transfer.setPower(0);
@@ -445,8 +445,8 @@ public class AutoLM4 extends LinearOpMode {
         //grab wobble
         drive.wobbleGoalServo.setPosition(drive.WOBBLE_CLOSED);
         sleep(700);
-        drive.wobbleGoalMotor2.setPower(0.9);
-        drive.wobbleGoalMotor1.setPower(0.9);
+        drive.wobbleGoalMotor2.setPower(1);
+        drive.wobbleGoalMotor1.setPower(1);
         sleep(400);
 
         drive.followTrajectory(traj.get(4).build());
