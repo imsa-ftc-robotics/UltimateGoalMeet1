@@ -15,9 +15,9 @@ import org.apache.commons.math3.geometry.euclidean.twod.Line;
 public class RegionalsTeleop extends LinearOpMode {
 
 
-    RegionalsBot robot = new RegionalsBot(hardwareMap);
 
     public void runOpMode(){
+        RegionalsBot robot = new RegionalsBot(hardwareMap);
 
 
         waitForStart();

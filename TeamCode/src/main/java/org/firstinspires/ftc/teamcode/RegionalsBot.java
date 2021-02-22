@@ -102,8 +102,15 @@ public class RegionalsBot extends MecanumDrive {
     public CRServo bottomRoller;
     public CRServo intakeWinch;
     public Servo wobbleGoalServo;
+    public Servo ringHitter;
     public CRServo wobbleGoalMotor1;
     public CRServo wobbleGoalMotor2;
+
+    public static final double HITTER_UP = 0;
+    public static final double HITTER_DOWN = 0;
+
+    public static final double TRANSFER_UP = 0;
+    public static final double TRANSFER_DOWN = 0;
 
     //declaring constants for wobble goal positions
     public static final double WOBBLE_CLOSED = 0.65;
@@ -202,6 +209,7 @@ public class RegionalsBot extends MecanumDrive {
 
         transferServo = (Servo)hardwareMap.get("transferServo");
         wobbleGoalServo =(Servo)hardwareMap.get("wobbleGoalServo");
+        ringHitter = (Servo)hardwareMap.get("ringHitter");
         wobbleGoalServo.setDirection(Servo.Direction.REVERSE);
         intakeWinch = (CRServo)hardwareMap.get("intakeWinch");
         bottomRoller = (CRServo)hardwareMap.get("bottomRoller");

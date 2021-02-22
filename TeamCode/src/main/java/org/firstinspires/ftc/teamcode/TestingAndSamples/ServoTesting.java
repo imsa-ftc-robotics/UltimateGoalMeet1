@@ -4,6 +4,7 @@ import android.graphics.Region;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.Archive.Robot;
 import org.firstinspires.ftc.teamcode.RegionalsBot;
@@ -12,10 +13,12 @@ import org.firstinspires.ftc.teamcode.RegionalsBot;
 //@Disabled
 public class ServoTesting extends LinearOpMode {
 
-    RegionalsBot robot = new RegionalsBot(hardwareMap);
+
 
     @Override
     public void runOpMode() {
+        RegionalsBot robot = new RegionalsBot(hardwareMap);
+
         waitForStart();
         while(!isStopRequested()){
             robot.transferServo.setPosition(gamepad1.left_trigger);
