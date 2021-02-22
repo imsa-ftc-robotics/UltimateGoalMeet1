@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive;
+package org.firstinspires.ftc.teamcode;
 
 import androidx.annotation.NonNull;
 
@@ -37,13 +37,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.util.DashboardUtil;
 import org.firstinspires.ftc.teamcode.util.LynxModuleUtil;
 import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvInternalCamera;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,7 +59,7 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kA;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kStatic;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
 
-public class RobotV3 extends MecanumDrive {
+public class RegionalsBot extends MecanumDrive {
     public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(4.7, 0, 0.02);
     public static PIDCoefficients HEADING_PID = new PIDCoefficients(4.5, 0, 0);
 
@@ -95,12 +92,14 @@ public class RobotV3 extends MecanumDrive {
 
     private LinkedList<Pose2d> poseHistory;
 
-    private DcMotorEx leftFront, leftRear, rightRear, rightFront;
+    public DcMotorEx leftFront, leftRear, rightRear, rightFront;
     //declaring the superstructure motors
-    public DcMotorEx shooter;
+    public DcMotorEx shooter1;
+    public DcMotorEx shooter2;
     public DcMotorEx intake;
     public DcMotorEx transfer;
     //declaring servos
+    public CRServo bottomRoller;
     public CRServo intakeWinch;
     public Servo wobbleGoalServo;
     public CRServo wobbleGoalMotor1;
@@ -133,13 +132,13 @@ public class RobotV3 extends MecanumDrive {
     public UGContourRingPipeline pipeline;
     public OpenCvCamera camera;
 
-    public static RobotV3 running_opmode;
+    public static RegionalsBot running_opmode;
 
 
     public int cameraMonitorViewId;
 
 
-    public RobotV3(HardwareMap hardwareMap) {
+    public RegionalsBot(HardwareMap hardwareMap) {
         super(kV, kA, kStatic, TRACK_WIDTH, TRACK_WIDTH, LATERAL_MULTIPLIER);
 
         dashboard = FtcDashboard.getInstance();
@@ -192,8 +191,11 @@ public class RobotV3 extends MecanumDrive {
         intake = (DcMotorEx)hardwareMap.get("intake");
         intake.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-        shooter = (DcMotorEx)hardwareMap.get("shooter");
-        shooter.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        shooter1 = (DcMotorEx)hardwareMap.get("shooter");
+        shooter1.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+
+        shooter2 = (DcMotorEx)hardwareMap.get("shooter2");
+        shooter2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         transfer = (DcMotorEx)hardwareMap.get("transfer");
         transfer.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -202,6 +204,7 @@ public class RobotV3 extends MecanumDrive {
         wobbleGoalServo =(Servo)hardwareMap.get("wobbleGoalServo");
         wobbleGoalServo.setDirection(Servo.Direction.REVERSE);
         intakeWinch = (CRServo)hardwareMap.get("intakeWinch");
+        bottomRoller = (CRServo)hardwareMap.get("bottomRoller");
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 

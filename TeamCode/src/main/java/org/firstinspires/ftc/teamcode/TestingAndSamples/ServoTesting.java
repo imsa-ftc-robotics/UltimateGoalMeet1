@@ -1,19 +1,25 @@
 package org.firstinspires.ftc.teamcode.TestingAndSamples;
 
+import android.graphics.Region;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Archive.Robot;
+import org.firstinspires.ftc.teamcode.RegionalsBot;
 
 @TeleOp
 //@Disabled
-public class ServoTesting extends Robot {
+public class ServoTesting extends LinearOpMode {
+
+    RegionalsBot robot = new RegionalsBot(hardwareMap);
 
     @Override
-    public void op_mode() {
+    public void runOpMode() {
         waitForStart();
         while(!isStopRequested()){
-            transferServo.setPosition(gamepad1.left_trigger);
-            telemetry.addData("position", transferServo.getPosition());
+            robot.transferServo.setPosition(gamepad1.left_trigger);
+            telemetry.addData("position", robot.transferServo.getPosition());
             telemetry.update();
 
             /*tray
