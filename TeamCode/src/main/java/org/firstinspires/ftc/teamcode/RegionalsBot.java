@@ -139,10 +139,19 @@ public class RegionalsBot extends MecanumDrive {
     public UGContourRingPipeline pipeline;
     public OpenCvCamera camera;
 
-    public static RegionalsBot running_opmode;
-
 
     public int cameraMonitorViewId;
+
+
+    // Copy your PID Coefficients here
+    public static PIDCoefficients SHOOTER_VELO_PID = new PIDCoefficients(0.002, 0, 0.00003);
+
+    // Copy your feedforward gains here
+    public static double kV = 0.0043;
+    public static double kA = 0.00012;
+    public static double kStatic = 0;
+
+
 
 
     public RegionalsBot(HardwareMap hardwareMap) {
@@ -202,7 +211,8 @@ public class RegionalsBot extends MecanumDrive {
         shooter1.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
         shooter2 = (DcMotorEx)hardwareMap.get("shooter2");
-        shooter2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        shooter2.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        shooter1.setDirection(DcMotorEx.Direction.REVERSE);
 
         transfer = (DcMotorEx)hardwareMap.get("transfer");
         transfer.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

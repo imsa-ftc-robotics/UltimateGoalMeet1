@@ -4,8 +4,10 @@ import android.graphics.Region;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.apache.commons.math3.geometry.euclidean.twod.Line;
@@ -14,16 +16,22 @@ import org.apache.commons.math3.geometry.euclidean.twod.Line;
 //@Disabled
 public class RegionalsTeleop extends LinearOpMode {
 
-
+    private final ElapsedTime veloTimer = new ElapsedTime();
+    private double lastTargetVelo = 0.0;
 
     public void runOpMode(){
         RegionalsBot robot = new RegionalsBot(hardwareMap);
 
+        VelocityPIDFController veloController = new VelocityPIDFController(robot.SHOOTER_VELO_PID, robot.kV, robot.kA, robot.kStatic);
+
+        robot.shooter1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.shooter2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        double targetVelo = 0;
+
+
 
         waitForStart();
-        robot.shooter1.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        robot.shooter1.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        //shooter.setDirection(DcMotorEx.Direction.REVERSE);
 
         double shift;
         double reverse = 1;
@@ -62,7 +70,7 @@ public class RegionalsTeleop extends LinearOpMode {
 
             double intakePower = gamepad2.left_trigger-gamepad2.right_trigger;
             robot.intake.setPower(intakePower);
-            robot.bottomRoller.setPower(intakePower);
+            robot.bottomRoller.setPower(-intakePower);
 
             if (gamepad2.a)
                 robot.wobbleGoalServo.setPosition(robot.WOBBLE_CLOSED);
@@ -73,24 +81,46 @@ public class RegionalsTeleop extends LinearOpMode {
             robot.wobbleGoalMotor1.setPower(wobbleGoalMotorPower);
             robot.wobbleGoalMotor2.setPower(wobbleGoalMotorPower);
 
+
+            ///// Run the velocity controller ////
+
             if(gamepad1.a){
-                robot.shooter1.setVelocity(2200);
+                targetVelo = 1900;
             }
             else if (gamepad1.b){
-                robot.shooter1.setVelocity(1650);
+                targetVelo = 1650;
             }
             else if (gamepad1.x){
-                robot.shooter1.setPower(0);
+                targetVelo = 0.2*2200;
             }
             else if (gamepad2.y){
-                robot.shooter1.setPower(0);
+                targetVelo = 0;
             }
+
+            // Call necessary controller methods
+            veloController.setTargetVelocity(targetVelo);
+            veloController.setTargetAcceleration((targetVelo - lastTargetVelo) / veloTimer.seconds());
+            veloTimer.reset();
+
+
+
+            lastTargetVelo = targetVelo;
+
+            // Get the velocity from the motor with the encoder
+            double motorPos = robot.shooter1.getCurrentPosition();
+            double motorVelo = robot.shooter1.getVelocity();
+
+            // Update the controller and set the power for each motor
+            double power = veloController.update(motorPos, motorVelo);
+            robot.shooter1.setPower(power);
+            robot.shooter2.setPower(power);
+
 
             if (gamepad2.dpad_up){
                 robot.transferServo.setPosition(0);
             }
             else if (gamepad2.dpad_down){
-                robot.transferServo.setPosition(0.31);
+                robot.transferServo.setPosition(0.16);
             }
 
             //intake winch
