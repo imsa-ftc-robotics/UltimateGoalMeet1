@@ -508,8 +508,8 @@ public class RegionalsBot extends MecanumDrive {
     }
     public void wait_with_shooter_pid(int target_velocity, long milliseconds) {
         this.setup_shooter_pid(target_velocity);
-        Instant goal = Instant.now().plus(Duration.ofMillis(milliseconds));
-        while (Instant.now().isBefore(goal)) {
+        long goal = System.currentTimeMillis() + milliseconds;
+        while (System.currentTimeMillis() < goal) {
             this.continue_shooter_pid();
         }
     }
