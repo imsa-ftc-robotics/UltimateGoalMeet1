@@ -42,6 +42,8 @@ import org.firstinspires.ftc.teamcode.util.DashboardUtil;
 import org.firstinspires.ftc.teamcode.util.LynxModuleUtil;
 import org.openftc.easyopencv.OpenCvCamera;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -478,4 +480,37 @@ public class RegionalsBot extends MecanumDrive {
         return imu.getAngularOrientation().firstAngle;
     }
 
+    private VelocityPIDFController shooter_pid_controller;
+    private void setup_shooter_pid(int target_velocity) {
+        this.shooter_pid_controller = new VelocityPIDFController(SHOOTER_VELO_PID, kV, kA, kStatic);
+        this.shooter_pid_controller.setTargetVelocity(target_velocity);
+        //shooter_pid_controller.setTargetAcceleration((targetVelo - lastTargetVelo) / veloTimer.seconds());
+        this.shooter_pid_controller.reset();
+        this.continue_shooter_pid();
+    }
+    private void continue_shooter_pid() {
+        // Get the velocity from the motor with the encoder
+        double motorPos = shooter1.getCurrentPosition();
+        double motorVelo = shooter1.getVelocity();
+
+        // Update the controller and set the power for each motor
+        double power = this.shooter_pid_controller.update(motorPos, motorVelo);
+        shooter1.setPower(power);
+        shooter2.setPower(power);
+    }
+
+    public void drive_with_shooter_pid(int target_velocity) {
+        this.setup_shooter_pid(target_velocity);
+        while (this.isBusy()) {
+            this.update();
+            this.continue_shooter_pid();
+        }
+    }
+    public void wait_with_shooter_pid(int target_velocity, long milliseconds) {
+        this.setup_shooter_pid(target_velocity);
+        Instant goal = Instant.now().plus(Duration.ofMillis(milliseconds));
+        while (Instant.now().isBefore(goal)) {
+            this.continue_shooter_pid();
+        }
+    }
 }

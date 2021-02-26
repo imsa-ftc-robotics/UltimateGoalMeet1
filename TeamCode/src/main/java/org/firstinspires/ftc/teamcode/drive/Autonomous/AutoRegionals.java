@@ -15,7 +15,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Archive.Robot;
-import org.firstinspires.ftc.teamcode.drive.RobotV3;
+import org.firstinspires.ftc.teamcode.RegionalsBot;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -32,11 +32,13 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MAX_VEL;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.TRACK_WIDTH;
 
 @Autonomous
-public class AutoLM4 extends LinearOpMode {
+public class AutoRegionals extends LinearOpMode {
+
+    final int AUTONOMOUS_SHOOTER_VELOCITY = 2100;
 
     @Override
     public void runOpMode() throws InterruptedException {
-        RobotV3 drive = new RobotV3(hardwareMap);
+        RegionalsBot drive = new RegionalsBot(hardwareMap);
         drive.cameraMonitorViewId = this
                 .hardwareMap
                 .appContext
@@ -100,8 +102,8 @@ public class AutoLM4 extends LinearOpMode {
         }
 
     }
-  
-    private ArrayList<TrajectoryBuilder> nearTrajectory(Pose2d startPose, RobotV3 drive){
+
+    private ArrayList<TrajectoryBuilder> nearTrajectory(Pose2d startPose, RegionalsBot drive){
         ArrayList<TrajectoryBuilder> near = new ArrayList<TrajectoryBuilder>();
 
         TrajectoryBuilder near1 = drive.trajectoryBuilder(startPose)
@@ -155,7 +157,7 @@ public class AutoLM4 extends LinearOpMode {
         return near;
     }
 
-    private ArrayList<TrajectoryBuilder> midTrajectory(Pose2d startPose, RobotV3 drive){
+    private ArrayList<TrajectoryBuilder> midTrajectory(Pose2d startPose, RegionalsBot drive){
         ArrayList<TrajectoryBuilder> mid = new ArrayList<TrajectoryBuilder>();
 
         TrajectoryBuilder middle1 = drive.trajectoryBuilder(startPose)
@@ -215,7 +217,7 @@ public class AutoLM4 extends LinearOpMode {
         return mid;
     }
 
-    private ArrayList<TrajectoryBuilder> farTrajectory(Pose2d startPose, RobotV3 drive){
+    private ArrayList<TrajectoryBuilder> farTrajectory(Pose2d startPose, RegionalsBot drive){
         ArrayList<TrajectoryBuilder> far = new ArrayList<TrajectoryBuilder>();
 
         TrajectoryBuilder far1 = drive.trajectoryBuilder(startPose)
@@ -268,7 +270,7 @@ public class AutoLM4 extends LinearOpMode {
 
     }
 
-    private void followNear(Pose2d startPose, RobotV3 drive){
+    private void followNear(Pose2d startPose, RegionalsBot drive){
         ArrayList<TrajectoryBuilder> traj = nearTrajectory(startPose, drive);
 
         drive.followTrajectory(traj.get(0).build());
@@ -288,21 +290,22 @@ public class AutoLM4 extends LinearOpMode {
         drive.followTrajectory(traj.get(6).build());
         sleep(100);
 
-        drive.shooter.setVelocity(2200);
+        drive.followTrajectoryAsync(traj.get(1).build());
+        drive.drive_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY);
+        drive.wait_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY, 500);
 
-        drive.followTrajectory(traj.get(1).build());
-        sleep(500);
-
-        drive.turn(Math.toRadians(180));
-        sleep(500);
+        drive.turnAsync(Math.toRadians(180));
+        drive.drive_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY);
+        drive.wait_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY, 500);
 
         drive.transferServo.setPosition(0);
-        sleep(300);
+        drive.wait_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY, 300);
         drive.transfer.setPower(-0.9);
         drive.intake.setPower(-0.5);
-        sleep(3000);
+        drive.wait_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY, 3000);
         drive.transfer.setPower(0);
-        drive.shooter.setVelocity(0);
+        drive.shooter1.setPower(0);
+        drive.shooter2.setPower(0);
         drive.intake.setPower(0);
 
 
@@ -343,7 +346,7 @@ public class AutoLM4 extends LinearOpMode {
         sleep(20000);
     }
 
-    private void followMid(Pose2d startPose, RobotV3 drive){
+    private void followMid(Pose2d startPose, RegionalsBot drive){
         ArrayList<TrajectoryBuilder> traj = midTrajectory(startPose, drive);
 
         drive.followTrajectory(traj.get(0).build());
@@ -360,19 +363,19 @@ public class AutoLM4 extends LinearOpMode {
 
         drive.followTrajectory(traj.get(6).build());
 
-        drive.shooter.setVelocity(2200);
-        drive.followTrajectory(traj.get(1).build());
+        drive.followTrajectoryAsync(traj.get(1).build());
+        drive.drive_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY);
         drive.transferServo.setPosition(0);
-        sleep(300);
+        drive.wait_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY, 300);
 
         //run transfer and shoot
         drive.transfer.setPower(-0.9);
         drive.intake.setPower(-0.5);
-        sleep(3000);
+        drive.wait_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY, 3000);
         drive.transfer.setPower(0);
-        drive.shooter.setVelocity(0);
+        drive.shooter1.setPower(0);
+        drive.shooter2.setPower(0);
         drive.intake.setPower(0);
-
 
         drive.followTrajectory(traj.get(2).build());
         sleep(500);
@@ -410,7 +413,7 @@ public class AutoLM4 extends LinearOpMode {
         drive.followTrajectory(traj.get(5).build());
     }
 
-    private void followFar(Pose2d startPose, RobotV3 drive) {
+    private void followFar(Pose2d startPose, RegionalsBot drive) {
         ArrayList<TrajectoryBuilder> traj = farTrajectory(startPose, drive);
 
         drive.followTrajectory(traj.get(0).build());
@@ -424,9 +427,9 @@ public class AutoLM4 extends LinearOpMode {
         sleep(200);
 
         drive.followTrajectory(traj.get(6).build());
-        drive.shooter.setVelocity(2200);
 
         drive.followTrajectory(traj.get(1).build());
+        drive.drive_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY);
 
         drive.transferServo.setPosition(0);
         sleep(300);
@@ -434,7 +437,8 @@ public class AutoLM4 extends LinearOpMode {
         drive.intake.setPower(-0.5);
         sleep(3000);
         drive.transfer.setPower(0);
-        drive.shooter.setVelocity(0);
+        drive.shooter1.setPower(0);
+        drive.shooter2.setPower(0);
         drive.intake.setPower(0);
 
         drive.followTrajectory(traj.get(2).build());
