@@ -44,7 +44,7 @@ public class RegionalsTeleop extends LinearOpMode {
                 shift = 0.4;
             }
             else if (gamepad1.left_bumper){
-                shift = 0.2;
+                shift = 0.3;
             }
             else {
                 shift =1;
@@ -85,13 +85,13 @@ public class RegionalsTeleop extends LinearOpMode {
             ///// Run the velocity controller ////
 
             if(gamepad1.a){
-                targetVelo = 1900;
+                targetVelo = 1800;
             }
             else if (gamepad1.b){
-                targetVelo = 1650;
+                targetVelo = 1500;
             }
             else if (gamepad1.x){
-                targetVelo = 0.2*2200;
+                targetVelo = 0.4*2200;
             }
             else if (gamepad2.y){
                 targetVelo = 0;
@@ -101,7 +101,6 @@ public class RegionalsTeleop extends LinearOpMode {
             veloController.setTargetVelocity(targetVelo);
             veloController.setTargetAcceleration((targetVelo - lastTargetVelo) / veloTimer.seconds());
             veloTimer.reset();
-
 
 
             lastTargetVelo = targetVelo;

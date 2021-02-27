@@ -39,7 +39,7 @@ public class AutoRegionals extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         RegionalsBot drive = new RegionalsBot(hardwareMap);
-        drive.cameraMonitorViewId = this
+        /*drive.cameraMonitorViewId = this
                 .hardwareMap
                 .appContext
                 .getResources().getIdentifier(
@@ -64,23 +64,23 @@ public class AutoRegionals extends LinearOpMode {
         UGContourRingPipeline.Config.setHORIZON(drive.HORIZON);
 
         drive.camera.openCameraDeviceAsync(() -> drive.camera.startStreaming(drive.CAMERA_WIDTH, drive.CAMERA_HEIGHT, OpenCvCameraRotation.UPRIGHT));
-
+*/
         Pose2d startPose = new Pose2d(-64.0, 24.0, 0.0);
 
         drive.setPoseEstimate(startPose);
 
         FtcDashboard dashboard = FtcDashboard.getInstance();
 
-        UGContourRingPipeline.Height height = UGContourRingPipeline.Height.ONE;
-        while (!isStarted() && !isStopRequested()){
+        UGContourRingPipeline.Height height = UGContourRingPipeline.Height.ZERO;
+/*        while (!isStarted() && !isStopRequested()){
             height = drive.pipeline.getHeight();
             telemetry.addData("[Ring Stack] >>", height);
             telemetry.update();
             idle();
         }
-
+*/
         drive.wobbleGoalServo.setPosition(drive.WOBBLE_CLOSED);
-        drive.transferServo.setPosition(0.31);
+        drive.transferServo.setPosition(0.16);
 
 
         waitForStart();
@@ -280,7 +280,7 @@ public class AutoRegionals extends LinearOpMode {
 
         drive.wobbleGoalMotor1.setPower(-1);
         drive.wobbleGoalMotor2.setPower(-1);
-        sleep(1000);
+        sleep(800);
         drive.wobbleGoalMotor2.setPower(0);
         drive.wobbleGoalMotor1.setPower(0);
         drive.wobbleGoalServo.setPosition(drive.WOBBLE_OPEN);

@@ -60,10 +60,10 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
  */
 @Config
 public class SampleMecanumDrive extends MecanumDrive {
-    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(4.7, 0, 0.02);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(4.5, 0, 0);
+    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(6, 0, 0.1);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(7, 0, 0);
 
-    public static double LATERAL_MULTIPLIER = 1;
+    public static double LATERAL_MULTIPLIER = 58.598162809572074/53;
 
     public static double VX_WEIGHT = 1;
     public static double VY_WEIGHT = 1;
