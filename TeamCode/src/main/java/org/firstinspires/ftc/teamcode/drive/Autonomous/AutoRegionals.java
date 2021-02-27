@@ -290,14 +290,19 @@ public class AutoRegionals extends LinearOpMode {
         drive.followTrajectory(traj.get(6).build());
         sleep(100);
 
-        drive.followTrajectoryAsync(traj.get(1).build());
-        drive.drive_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY);
-        drive.wait_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY, 500);
+        //drive.followTrajectoryAsync(traj.get(1).build());
+        drive.followTrajectory(traj.get(1).build());
+        //drive.drive_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY);
+        //drive.wait_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY, 500);
+        sleep(500);
 
-        drive.turnAsync(Math.toRadians(180));
-        drive.drive_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY);
-        drive.wait_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY, 500);
+        //drive.turnAsync(Math.toRadians(180));
+        drive.turn(Math.toRadians(180));
+        //drive.drive_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY);
+        //drive.wait_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY, 500);
+        sleep(500);
 
+        drive.wait_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY, 1000);
         drive.transferServo.setPosition(0);
         drive.wait_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY, 300);
         drive.transfer.setPower(-0.9);
