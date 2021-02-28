@@ -42,8 +42,6 @@ import org.firstinspires.ftc.teamcode.util.DashboardUtil;
 import org.firstinspires.ftc.teamcode.util.LynxModuleUtil;
 import org.openftc.easyopencv.OpenCvCamera;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -144,12 +142,15 @@ public class RegionalsBot extends MecanumDrive {
 
 
     // Copy your PID Coefficients here
-    public static PIDCoefficients SHOOTER_VELO_PID = new PIDCoefficients(0.002, 0, 0.00003);
+    public static PIDCoefficients SHOOTER_VELO_PID = new PIDCoefficients(0.002, 0, 0.000031);
 
-    // Copy your feedforward gains here
-    public static double kV = 0.0043;
-    public static double kA = 0.00012;
-    public static double kStatic = 0;
+    public static double kV = 0.0146;
+    public static double kA = 0.002;
+    public static double kStatic = 0.07879;
+
+    public static double kVShoot = 0.000437;
+    public static double kAShoot = 0.0001399;
+    public static double kStaticShoot = 0;
 
 
 
@@ -480,7 +481,7 @@ public class RegionalsBot extends MecanumDrive {
 
     private VelocityPIDFController shooter_pid_controller;
     private void setup_shooter_pid(int target_velocity) {
-        this.shooter_pid_controller = new VelocityPIDFController(SHOOTER_VELO_PID, kV, kA, kStatic);
+        this.shooter_pid_controller = new VelocityPIDFController(SHOOTER_VELO_PID, kVShoot, kAShoot, kStaticShoot);
         this.shooter_pid_controller.setTargetVelocity(target_velocity);
         //shooter_pid_controller.setTargetAcceleration((targetVelo - lastTargetVelo) / veloTimer.seconds());
         this.shooter_pid_controller.reset();

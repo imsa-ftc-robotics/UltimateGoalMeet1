@@ -34,12 +34,12 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.TRACK_WIDTH;
 @Autonomous
 public class AutoRegionals extends LinearOpMode {
 
-    final int AUTONOMOUS_SHOOTER_VELOCITY = 2100;
+    final int AUTONOMOUS_SHOOTER_VELOCITY = 2000;
 
     @Override
     public void runOpMode() throws InterruptedException {
         RegionalsBot drive = new RegionalsBot(hardwareMap);
-        /*drive.cameraMonitorViewId = this
+        drive.cameraMonitorViewId = this
                 .hardwareMap
                 .appContext
                 .getResources().getIdentifier(
@@ -64,21 +64,20 @@ public class AutoRegionals extends LinearOpMode {
         UGContourRingPipeline.Config.setHORIZON(drive.HORIZON);
 
         drive.camera.openCameraDeviceAsync(() -> drive.camera.startStreaming(drive.CAMERA_WIDTH, drive.CAMERA_HEIGHT, OpenCvCameraRotation.UPRIGHT));
-*/
         Pose2d startPose = new Pose2d(-64.0, 24.0, 0.0);
 
         drive.setPoseEstimate(startPose);
 
         FtcDashboard dashboard = FtcDashboard.getInstance();
 
-        UGContourRingPipeline.Height height = UGContourRingPipeline.Height.ZERO;
-/*        while (!isStarted() && !isStopRequested()){
+        UGContourRingPipeline.Height height = UGContourRingPipeline.Height.ONE;
+        while (!isStarted() && !isStopRequested()){
             height = drive.pipeline.getHeight();
             telemetry.addData("[Ring Stack] >>", height);
             telemetry.update();
             idle();
         }
-*/
+
         drive.wobbleGoalServo.setPosition(drive.WOBBLE_CLOSED);
         drive.transferServo.setPosition(0.16);
 
@@ -119,7 +118,7 @@ public class AutoRegionals extends LinearOpMode {
                 .strafeRight(5);
 
         TrajectoryBuilder near2 = drive.trajectoryBuilder(nearStrafe.build().end(), true)
-                .splineTo(new Vector2d(-2.0, 38.0), Math.toRadians(180.0))
+                .splineTo(new Vector2d(-10.0, 38.0), Math.toRadians(180.0))
                 .addTemporalMarker(0.2, () -> {
                     drive.wobbleGoalMotor2.setPower(0.9);
                     drive.wobbleGoalMotor1.setPower(0.9);
@@ -175,7 +174,7 @@ public class AutoRegionals extends LinearOpMode {
 
 
         TrajectoryBuilder middle2 = drive.trajectoryBuilder(middleStrafe.build().end(), true)
-                .splineTo(new Vector2d(0.0, 40.0), 0.0)
+                .splineTo(new Vector2d(-6.0, 38.0), 0.0)
                 .addTemporalMarker(0.2, () -> {
 
                     drive.wobbleGoalMotor2.setPower(0.9);
@@ -195,7 +194,7 @@ public class AutoRegionals extends LinearOpMode {
         TrajectoryBuilder middle4 = new TrajectoryBuilder(middle3.build().end().plus(new Pose2d(0,0, Math.toRadians(270))), new MinVelocityConstraint(Arrays.asList(
                 new AngularVelocityConstraint(MAX_ANG_VEL),
                 new MecanumVelocityConstraint(35, TRACK_WIDTH))), drive.accelConstraint)
-                .strafeLeft(10);
+                .strafeLeft(8.5);
 
 
 
@@ -235,11 +234,11 @@ public class AutoRegionals extends LinearOpMode {
                 .strafeRight(10);
 
         TrajectoryBuilder far2 = drive.trajectoryBuilder(farStrafe.build().end(), true)
-                .splineTo(new Vector2d(0.0, 40.0), 0.0);
+                .splineTo(new Vector2d(-5.0, 40.0), 0.0);
 //shoot
 
         TrajectoryBuilder far3 = drive.trajectoryBuilder(far2.build().end(), true)
-                .splineTo(new Vector2d(-30.0, 48.0), Math.toRadians(180));
+                .splineTo(new Vector2d(-30.0, 45.0), Math.toRadians(180));
 
         //TURN 90 HERE
 
@@ -249,7 +248,7 @@ public class AutoRegionals extends LinearOpMode {
         TrajectoryBuilder far5 = drive.trajectoryBuilder(far4.build().end())
                 .splineTo(new Vector2d(-20.0, 50.0), 0.0)
                 .splineTo(new Vector2d(58.0, 42.0), 0.0)
-                .addTemporalMarker(0.5, () -> {
+                .addTemporalMarker(0.6, () -> {
                     drive.wobbleGoalMotor2.setPower(0);
                     drive.wobbleGoalMotor1.setPower(0);
                 });
@@ -290,19 +289,15 @@ public class AutoRegionals extends LinearOpMode {
         drive.followTrajectory(traj.get(6).build());
         sleep(100);
 
-        //drive.followTrajectoryAsync(traj.get(1).build());
-        drive.followTrajectory(traj.get(1).build());
-        //drive.drive_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY);
-        //drive.wait_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY, 500);
-        sleep(500);
+        drive.followTrajectoryAsync(traj.get(1).build());
+        //drive.followTrajectory(traj.get(1).build());
+        drive.drive_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY);
 
-        //drive.turnAsync(Math.toRadians(180));
-        drive.turn(Math.toRadians(180));
-        //drive.drive_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY);
-        //drive.wait_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY, 500);
-        sleep(500);
+        drive.turnAsync(Math.toRadians(180));
+        //drive.turn(Math.toRadians(180));
+        drive.drive_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY);
+        drive.wait_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY, 500);
 
-        drive.wait_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY, 1000);
         drive.transferServo.setPosition(0);
         drive.wait_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY, 300);
         drive.transfer.setPower(-0.9);
@@ -440,7 +435,7 @@ public class AutoRegionals extends LinearOpMode {
         sleep(300);
         drive.transfer.setPower(-0.9);
         drive.intake.setPower(-0.5);
-        sleep(3000);
+        drive.wait_with_shooter_pid(AUTONOMOUS_SHOOTER_VELOCITY, 3000);
         drive.transfer.setPower(0);
         drive.shooter1.setPower(0);
         drive.shooter2.setPower(0);
