@@ -22,7 +22,7 @@ public class RegionalsTeleop extends LinearOpMode {
     public void runOpMode(){
         RegionalsBot robot = new RegionalsBot(hardwareMap);
 
-        VelocityPIDFController veloController = new VelocityPIDFController(robot.SHOOTER_VELO_PID, robot.kV, robot.kA, robot.kStatic);
+        VelocityPIDFController veloController = new VelocityPIDFController(robot.SHOOTER_VELO_PID, robot.kVShoot, robot.kAShoot, robot.kStaticShoot);
 
         robot.shooter1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.shooter2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -85,10 +85,10 @@ public class RegionalsTeleop extends LinearOpMode {
             ///// Run the velocity controller ////
 
             if(gamepad1.a){
-                targetVelo = 1800;
+                targetVelo = 1950;
             }
             else if (gamepad1.b){
-                targetVelo = 1500;
+                targetVelo = 1800;
             }
             else if (gamepad1.x){
                 targetVelo = 0.4*2200;
