@@ -1,13 +1,9 @@
 package org.firstinspires.ftc.teamcode.TestingAndSamples;
 
-import android.graphics.Region;
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.Archive.Robot;
-import org.firstinspires.ftc.teamcode.RegionalsBot;
+import org.firstinspires.ftc.teamcode.Archive.RegionalsBot;
 
 @TeleOp
 //@Disabled

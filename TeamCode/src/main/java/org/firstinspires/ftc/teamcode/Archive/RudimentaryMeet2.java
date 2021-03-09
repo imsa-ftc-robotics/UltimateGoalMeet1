@@ -3,14 +3,14 @@ package org.firstinspires.ftc.teamcode.Archive;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.DropPosition;
-
 @Autonomous
 //extending the superclass
+@Disabled
 public class RudimentaryMeet2 extends Robot  {
     ElapsedTime runtime = new ElapsedTime();
 

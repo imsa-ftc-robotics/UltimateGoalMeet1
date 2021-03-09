@@ -2,11 +2,11 @@ package org.firstinspires.ftc.teamcode.state_machine_sketch;
 import com.arcrobotics.ftclib.vision.UGContourRingPipeline;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.RegionalsBot;
+import org.firstinspires.ftc.teamcode.Archive.RegionalsBot;
 
 //Shared State Here
 public abstract class AutonomousDrive implements StateMachineIsh {
-    LinearOpMode op;
+/*    LinearOpMode op;
     RegionalsBot bot;
 
     protected AutonomousDrive(AutonomousDrive old) {
@@ -41,4 +41,4 @@ class WaitForStart extends AutonomousDrive {
             return this;
         }
     }
-}
+*/}
